@@ -54,6 +54,7 @@
         </activity-alias>
 
         <activity android:name=".activity.TulingRobotActivity"/>
+        <activity android:name=".activity.IdCardActivity"/>
     </application>
 
 </manifest>

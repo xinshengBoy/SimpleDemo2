@@ -77,6 +77,10 @@
                     android:id="@+id/btn_tulingRobot"
                     style="@style/baseRes"
                     android:text="图灵机器人" />
+                <Button
+                    android:id="@+id/btn_idcard"
+                    style="@style/baseRes"
+                    android:text="身份证查询" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

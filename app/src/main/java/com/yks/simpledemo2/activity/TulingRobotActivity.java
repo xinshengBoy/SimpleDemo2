@@ -87,7 +87,7 @@ public class TulingRobotActivity extends Activity implements View.OnClickListene
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == TULINGSUCCESS){//未获取批次号
+            if (msg.what == TULINGSUCCESS){//获取回复成功
                 Bundle bundle = msg.getData();
                 txt_tuling.setText(bundle.getString("msg"));
             }
@@ -115,7 +115,7 @@ public class TulingRobotActivity extends Activity implements View.OnClickListene
             JSONObject object2 = new JSONObject();
             object2.put("inputText",object1);
             object.put("perception",object2);
-            
+
             JSONObject object3 = new JSONObject();
             object3.put("apiKey","90ca0c6864fa485190269daec7f86454");
             object3.put("userId","100047");
