@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.yhao.floatwindow.FloatWindow;
 import com.yhao.floatwindow.MoveType;
@@ -23,7 +22,6 @@ public class FloatWindowTest extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(getApplicationContext(),"我进来了",Toast.LENGTH_LONG).show();
         ImageView img = new ImageView(getApplicationContext());
         img.setImageResource(R.mipmap.home);
 

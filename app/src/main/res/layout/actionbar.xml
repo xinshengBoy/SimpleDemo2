@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actinbar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff000000">
+
+    <LinearLayout
+        android:id="@+id/actionbar_left_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <!--左侧图片-->
+        <ImageView
+            android:id="@+id/actionbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/actionbar_back"
+            android:visibility="gone" />
+        <!--左侧文字-->
+        <TextView
+            android:id="@+id/actionbar_left"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:gravity="center_vertical"
+            android:textColor="#ffffffff"
+            android:textSize="18sp"
+            android:visibility="gone" />
+    </LinearLayout>
+    <!--中间标题-->
+    <TextView
+        android:id="@+id/actionbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:lineSpacingExtra="-4dp"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:id="@+id/actionbar_re"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true">
+        <!--右侧文字-->
+        <TextView
+            android:id="@+id/actionbar_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="#ffffffff"
+            android:textSize="18sp"
+            android:visibility="gone" />
+        <!--右侧图片-->
+        <ImageView
+            android:id="@+id/actionbar_right_img"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_toEndOf="@+id/actionbar_right"
+            android:src="@drawable/actinbar_search"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
