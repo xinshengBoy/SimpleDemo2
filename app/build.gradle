@@ -21,9 +21,25 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    //recyclerview
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    //万能适配器
+    compile 'com.zhy:base-rvadapter:3.0.3'
+    //悬浮窗
     compile 'com.github.yhaolpz:FloatWindow:1.0.8'
+    //提示框对话框
+    compile 'com.github.1em0nsOft:LemonHello4Android:1.0.2'
+    compile 'com.github.1em0nsOft:LemonBubble4Android:1.0.12'
+    //3d菜单
+    compile 'com.github.Hitomis:CircleMenu:v1.1.0'
+    //tap bar菜单样式
+    compile 'com.github.michaldrabik:tapbarmenu:1.0.2'
+    //滑动解锁
+    compile 'com.andrognito.patternlockview:patternlockview:1.0.0'
+    //绘制几何体
+    compile 'io.fabianterhorst:Isometric:0.0.6.5'
+    //网络框架
+    compile 'com.android.volley:volley:1.0.0'
 }

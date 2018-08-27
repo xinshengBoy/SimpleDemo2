@@ -1,16 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout style="@style/baseLinearlayout">
-            <Button
-                android:id="@+id/btn_float_window"
-                style="@style/baseRes"
-                android:text="悬浮框"/>
+        android:layout_marginTop="3dp"
+        android:background="#E5B274"
+        android:gravity="center"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:text="主界面"
+        android:textColor="#50AD27"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_float_window"
+                    style="@style/baseRes"
+                    android:text="悬浮框" />
+
+                <Button
+                    android:id="@+id/btn_webview_intercept"
+                    style="@style/baseRes"
+                    android:text="WebView拦截" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_3d_menu"
+                    style="@style/baseRes"
+                    android:text="3D菜单" />
+
+                <Button
+                    android:id="@+id/btn_update"
+                    style="@style/baseRes"
+                    android:text="定时更新" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_PatternLockView"
+                    style="@style/baseRes"
+                    android:text="滑动解锁" />
+                <Button
+                    android:id="@+id/btn_isometric"
+                    style="@style/baseRes"
+                    android:text="几何图" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_recyclerview"
+                    style="@style/baseRes"
+                    android:text="recyclerview" />
+                <Button
+                    android:id="@+id/btn_changeIcon"
+                    style="@style/baseRes"
+                    android:text="动态更改APP图标" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_tulingRobot"
+                    style="@style/baseRes"
+                    android:text="图灵机器人" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

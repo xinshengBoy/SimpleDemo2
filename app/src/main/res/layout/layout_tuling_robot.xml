@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</android.support.constraint.ConstraintLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--actionbar-->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical" />
+    <EditText
+        android:id="@+id/et_robot"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_button"
+        android:hint="请输入你的问题"
+        android:layout_margin="5dp"/>
+    <Button
+        android:id="@+id/btn_robot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="询问"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_button"
+        android:gravity="center"
+        android:layout_margin="5dp"/>
+    <TextView
+        android:id="@+id/txt_tuling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+</LinearLayout>

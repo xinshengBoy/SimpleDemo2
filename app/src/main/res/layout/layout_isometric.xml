@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--actionbar-->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical" />
+    <io.fabianterhorst.isometric.IsometricView
+        android:id="@+id/view_isometric1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+    <io.fabianterhorst.isometric.IsometricView
+        android:id="@+id/view_isometric2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+    <io.fabianterhorst.isometric.IsometricView
+        android:id="@+id/view_isometric3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+    <io.fabianterhorst.isometric.IsometricView
+        android:id="@+id/view_isometric4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+    <io.fabianterhorst.isometric.IsometricView
+        android:id="@+id/view_isometric5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

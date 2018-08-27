@@ -1,4 +1,4 @@
-package com.yks.scancollectgoods.tools;
+package com.yks.simpledemo2.tools;
 
 import android.content.Context;
 import android.view.LayoutInflater;
