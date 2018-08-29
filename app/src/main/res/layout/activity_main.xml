@@ -82,6 +82,13 @@
                     style="@style/baseRes"
                     android:text="身份证查询" />
             </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_google_translate"
+                    style="@style/baseRes"
+                    android:text="谷歌翻译" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
