@@ -85,9 +85,24 @@
             <LinearLayout style="@style/baseLinearlayout">
 
                 <Button
-                    android:id="@+id/btn_google_translate"
+                android:id="@+id/btn_google_translate"
+                style="@style/baseRes"
+                android:text="谷歌翻译" />
+                <Button
+                    android:id="@+id/btn_pdascan"
                     style="@style/baseRes"
-                    android:text="谷歌翻译" />
+                    android:text="PDA扫描" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_simple_piano"
+                    style="@style/baseRes"
+                    android:text="简易钢琴" />
+                <!--<Button-->
+                    <!--android:id="@+id/btn_pdascan"-->
+                    <!--style="@style/baseRes"-->
+                    <!--android:text="PDA扫描" />-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
