@@ -42,4 +42,6 @@ dependencies {
     compile 'io.fabianterhorst:Isometric:0.0.6.5'
     //网络框架
     compile 'com.android.volley:volley:1.0.0'
+    //fastjson
+    compile  'com.alibaba:fastjson:1.2.37'
 }

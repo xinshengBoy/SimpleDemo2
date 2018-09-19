@@ -54,6 +54,10 @@
         </activity-alias>
 
         <activity android:name=".activity.TulingRobotActivity"/>
+        <activity android:name=".activity.IdCardActivity"/>
+        <activity android:name=".activity.GoogleTranslateActivity"/>
+        <activity android:name=".activity.PDAScanActivity"/>
+        <activity android:name=".activity.SimplePiano"/>
     </application>
 
 </manifest>
