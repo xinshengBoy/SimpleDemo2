@@ -59,6 +59,7 @@
         <activity android:name=".activity.PDAScanActivity"/>
         <activity android:name=".activity.SimplePiano"/>
         <activity android:name=".activity.EmojeRainActivity"/>
+        <activity android:name=".activity.SelShape"/>
     </application>
 
 </manifest>

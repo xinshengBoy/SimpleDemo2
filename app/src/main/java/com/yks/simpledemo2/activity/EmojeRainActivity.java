@@ -1,6 +1,7 @@
 package com.yks.simpledemo2.activity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
+import com.yks.simpledemo2.widget.BadgeView;
 import com.yks.simpledemo2.widget.MyActionBar;
 import com.yks.simpledemo2.widget.RainView;
 
@@ -59,6 +61,11 @@ public class EmojeRainActivity extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         if (view == btn_emojeOne){
             start(R.mipmap.emoje1);
+            BadgeView badge = new BadgeView(this);
+            badge.setTargetView(et_emojeCount);
+//            badge.setTargetView(btn_emojeOne);
+            badge.setBadgeCount(99);
+            badge.setShadowLayer(2,-1,-1, Color.GREEN);
         }else if (view == btn_emojeTwo){
             start(R.mipmap.emoje2);
         }

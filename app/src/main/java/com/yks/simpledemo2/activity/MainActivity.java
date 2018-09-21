@@ -24,14 +24,14 @@ public class MainActivity extends Activity {
     //所有activity_main里面的id集合
     private int [] ids = new int[]{R.id.btn_float_window,R.id.btn_webview_intercept,R.id.btn_3d_menu,R.id.btn_update,R.id.btn_PatternLockView,R.id.btn_isometric,
                                     R.id.btn_recyclerview,R.id.btn_changeIcon,R.id.btn_tulingRobot,R.id.btn_idcard,R.id.btn_google_translate,R.id.btn_pdascan,
-                                    R.id.btn_simple_piano,R.id.btn_emoje_rain};
+                                    R.id.btn_simple_piano,R.id.btn_emoje_rain,R.id.btn_selshape};
     //                              桌面悬浮框           WebView拦截                3D菜单           定时更新        滑动解锁                 绘制几何图形
     //                              仪表盘                动态更改app桌面图标  图灵机器人          身份证查询        谷歌翻译                 PDA扫描
-    //                              简易钢琴              表情雨
+    //                              简易钢琴              表情雨              shape
     //所有点击id对应要跳转的页面
     private Class [] classes = new Class[]{FloatWindowTest.class,WebViewIntercept.class,Menu3D.class,TimingUpdate.class,PatternLocks.class,IsometricActivity.class,
                                     RecyclerviewrActivity.class,ChangeIconActivity.class,TulingRobotActivity.class,IdCardActivity.class,GoogleTranslateActivity.class,PDAScanActivity.class,
-                                    SimplePiano.class,EmojeRainActivity.class};
+                                    SimplePiano.class,EmojeRainActivity.class,SelShape.class};
     public static RequestQueue mQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

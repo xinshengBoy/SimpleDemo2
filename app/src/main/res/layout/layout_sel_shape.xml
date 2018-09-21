@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--actionbar-->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="边框背景"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        app:corners_radius="8dp"
+        app:solid_color="@android:color/holo_red_light"
+        app:stroke_width="3dp"
+        app:unpressed_color="@android:color/black"
+        app:pressed_color="@android:color/holo_green_dark"
+        app:ripple_enable="true"
+        app:ripple_color="@android:color/white"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="确认"
+        android:textSize="21sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:background="@android:color/holo_blue_dark"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        app:corners_radius="6dp"
+        app:gradient_angle="0"
+        app:gradient_centerColor="@android:color/holo_orange_dark"
+        app:gradient_endColor="@android:color/holo_green_dark"
+        app:gradient_startColor="@android:color/holo_purple"
+        app:shape="rectangle"/>
+</LinearLayout>

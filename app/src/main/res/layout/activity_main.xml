@@ -104,6 +104,17 @@
                     style="@style/baseRes"
                     android:text="表情雨" />
             </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_selshape"
+                    style="@style/baseRes"
+                    android:text="shape" />
+                <!--<Button-->
+                    <!--android:id="@+id/btn_emoje_rain"-->
+                    <!--style="@style/baseRes"-->
+                    <!--android:text="表情雨" />-->
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
