@@ -99,10 +99,10 @@
                     android:id="@+id/btn_simple_piano"
                     style="@style/baseRes"
                     android:text="简易钢琴" />
-                <!--<Button-->
-                    <!--android:id="@+id/btn_pdascan"-->
-                    <!--style="@style/baseRes"-->
-                    <!--android:text="PDA扫描" />-->
+                <Button
+                    android:id="@+id/btn_emoje_rain"
+                    style="@style/baseRes"
+                    android:text="表情雨" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
