@@ -5,6 +5,10 @@
     <!--权限申请声明-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/><!--弹出对话框-->
     <uses-permission android:name="android.permission.INTERNET"/><!--网络-->
+    <uses-permission android:name="android.permission.CAMERA"/><!--拍照及调用相册权限-->
+    <!--读写磁盘权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -60,6 +64,12 @@
         <activity android:name=".activity.SimplePiano"/>
         <activity android:name=".activity.EmojeRainActivity"/>
         <activity android:name=".activity.SelShape"/>
+        <activity android:name=".activity.AliPayVoice"/>
+        <activity android:name=".activity.ShiJingActivity"/>
+        <activity android:name=".activity.LunyuActivity"/>
+        <activity android:name=".activity.SongCiActivity"/>
+        <activity android:name=".activity.TangShiActivity"/>
+        <activity android:name=".activity.PicAsciiActivity"/>
     </application>
 
 </manifest>

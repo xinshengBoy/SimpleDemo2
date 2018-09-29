@@ -110,10 +110,43 @@
                     android:id="@+id/btn_selshape"
                     style="@style/baseRes"
                     android:text="shape" />
+                <Button
+                    android:id="@+id/btn_alipay_voice"
+                    style="@style/baseRes"
+                    android:text="支付宝语音" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_shijing"
+                    style="@style/baseRes"
+                    android:text="诗经" />
+                <Button
+                    android:id="@+id/btn_lunyu"
+                    style="@style/baseRes"
+                    android:text="论语" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_tangshi"
+                    style="@style/baseRes"
+                    android:text="唐诗" />
+                <Button
+                    android:id="@+id/btn_songci"
+                    style="@style/baseRes"
+                    android:text="宋词" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_pic2Ascii"
+                    style="@style/baseRes"
+                    android:text="字符画" />
                 <!--<Button-->
-                    <!--android:id="@+id/btn_emoje_rain"-->
+                    <!--android:id="@+id/btn_songci"-->
                     <!--style="@style/baseRes"-->
-                    <!--android:text="表情雨" />-->
+                    <!--android:text="宋词" />-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
