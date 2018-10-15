@@ -56,5 +56,8 @@ dependencies {
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
-
+    //打字效果
+    compile 'com.king.view:supertextview:1.0.1'
+    //继承基础控件 1.直接在控件实现selector，shape，gradient功能 2.无需另写xml实现圆形，圆角，渐变以及各个state状态背景/边框/文字颜色 *
+    compile 'com.ruffian.library:RWidgetHelper:1.0.2'
 }

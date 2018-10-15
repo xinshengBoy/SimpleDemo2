@@ -143,10 +143,21 @@
                     android:id="@+id/btn_pic2Ascii"
                     style="@style/baseRes"
                     android:text="字符画" />
+                <Button
+                    android:id="@+id/btn_tabhost"
+                    style="@style/baseRes"
+                    android:text="TAB" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_typing_word"
+                    style="@style/baseRes"
+                    android:text="打字效果" />
                 <!--<Button-->
-                    <!--android:id="@+id/btn_songci"-->
+                    <!--android:id="@+id/btn_tabhost"-->
                     <!--style="@style/baseRes"-->
-                    <!--android:text="宋词" />-->
+                    <!--android:text="TAB" />-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

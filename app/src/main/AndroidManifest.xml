@@ -70,6 +70,12 @@
         <activity android:name=".activity.SongCiActivity"/>
         <activity android:name=".activity.TangShiActivity"/>
         <activity android:name=".activity.PicAsciiActivity"/>
+        <activity android:name=".activity.TabHostActivity"/>
+        <activity android:name=".activity.TaskListActivity"/>
+        <activity android:name=".activity.ScanPickOutActivity"/>
+        <activity android:name=".activity.PickedListActivity"/>
+        <activity android:name=".activity.PickingActivity"/>
+        <activity android:name=".activity.TypingWordActivity"/>
     </application>
 
 </manifest>
