@@ -111,9 +111,9 @@
                     style="@style/baseRes"
                     android:text="shape" />
                 <Button
-                    android:id="@+id/btn_alipay_voice"
+                    android:id="@+id/btn_r_helper"
                     style="@style/baseRes"
-                    android:text="支付宝语音" />
+                    android:text="基础控件定义" />
             </LinearLayout>
             <LinearLayout style="@style/baseLinearlayout">
 
@@ -154,10 +154,43 @@
                     android:id="@+id/btn_typing_word"
                     style="@style/baseRes"
                     android:text="打字效果" />
-                <!--<Button-->
-                    <!--android:id="@+id/btn_tabhost"-->
-                    <!--style="@style/baseRes"-->
-                    <!--android:text="TAB" />-->
+                <Button
+                    android:id="@+id/btn_alipay_voice"
+                    style="@style/baseRes"
+                    android:text="支付宝语音" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_nbasport"
+                    style="@style/baseRes"
+                    android:text="NBA" />
+                <Button
+                    android:id="@+id/btn_calllogs"
+                    style="@style/baseRes"
+                    android:text="通话记录" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_reptilian"
+                    style="@style/baseRes"
+                    android:text="爬虫" />
+                <Button
+                    android:id="@+id/btn_tabActivity"
+                    style="@style/baseRes"
+                    android:text="tabhost中activity的跳转" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_calculator"
+                    style="@style/baseRes"
+                    android:text="计算器" />
+                <Button
+                    android:id="@+id/btn_faceRecognite"
+                    style="@style/baseRes"
+                    android:text="人脸识别" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

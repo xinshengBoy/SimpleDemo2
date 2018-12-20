@@ -29,35 +29,43 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     //recyclerview
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    api 'com.android.support:recyclerview-v7:26.1.0'
     //万能适配器
-    compile 'com.zhy:base-rvadapter:3.0.3'
+    api 'com.zhy:base-rvadapter:3.0.3'
     //悬浮窗
-    compile 'com.github.yhaolpz:FloatWindow:1.0.8'
+    api 'com.github.yhaolpz:FloatWindow:1.0.8'
     //提示框对话框
-    compile 'com.github.1em0nsOft:LemonHello4Android:1.0.2'
-    compile 'com.github.1em0nsOft:LemonBubble4Android:1.0.12'
+    api 'com.github.1em0nsOft:LemonHello4Android:1.0.2'
+    api 'com.github.1em0nsOft:LemonBubble4Android:1.0.12'
     //3d菜单
-    compile 'com.github.Hitomis:CircleMenu:v1.1.0'
+    api 'com.github.Hitomis:CircleMenu:v1.1.0'
     //tap bar菜单样式
-    compile 'com.github.michaldrabik:tapbarmenu:1.0.2'
+    api 'com.github.michaldrabik:tapbarmenu:1.0.2'
     //滑动解锁
-    compile 'com.andrognito.patternlockview:patternlockview:1.0.0'
+    api 'com.andrognito.patternlockview:patternlockview:1.0.0'
     //绘制几何体
-    compile 'io.fabianterhorst:Isometric:0.0.6.5'
+    api 'io.fabianterhorst:Isometric:0.0.6.5'
     //网络框架
-    compile 'com.android.volley:volley:1.0.0'
+    api 'com.android.volley:volley:1.1.0'
     //fastjson
-    compile  'com.alibaba:fastjson:1.2.37'
+    api  'com.alibaba:fastjson:1.2.37'
     //在布局文件直接实现shape
     implementation 'com.noober.backgorund:core:1.0.5'
     //支付宝付款语音
-    compile 'com.github.javaexception:VoiceAnnouncements:v1.0'
+    api 'com.github.javaexception:VoiceAnnouncements:v1.0'
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
     //打字效果
-    compile 'com.king.view:supertextview:1.0.1'
+    api 'com.king.view:supertextview:1.0.1'
     //继承基础控件 1.直接在控件实现selector，shape，gradient功能 2.无需另写xml实现圆形，圆角，渐变以及各个state状态背景/边框/文字颜色 *
-    compile 'com.ruffian.library:RWidgetHelper:1.0.2'
+    api 'com.ruffian.library:RWidgetHelper:1.0.2'
+    //glide 图片加载框架
+    api 'com.github.bumptech.glide:glide:4.5.0'
+    //okhttp网络框架
+    api 'com.zhy:okhttputils:2.6.2'
+    //爬虫
+    implementation 'com.github.pengMaster:SpiderTool:1.0.0'
+    //权限管理
+    api 'com.yanzhenjie:permission:1.1.0'
 }

@@ -25,16 +25,22 @@ public class MainActivity extends Activity {
     private int [] ids = new int[]{R.id.btn_float_window,R.id.btn_webview_intercept,R.id.btn_3d_menu,R.id.btn_update,R.id.btn_PatternLockView,R.id.btn_isometric,
                                     R.id.btn_recyclerview,R.id.btn_changeIcon,R.id.btn_tulingRobot,R.id.btn_idcard,R.id.btn_google_translate,R.id.btn_pdascan,
                                     R.id.btn_simple_piano,R.id.btn_emoje_rain,R.id.btn_selshape,R.id.btn_alipay_voice,R.id.btn_shijing,R.id.btn_lunyu,R.id.btn_songci,
-                                    R.id.btn_tangshi,R.id.btn_pic2Ascii,R.id.btn_tabhost,R.id.btn_typing_word};
+                                    R.id.btn_tangshi,R.id.btn_pic2Ascii,R.id.btn_tabhost,R.id.btn_typing_word,R.id.btn_r_helper,
+                                    R.id.btn_nbasport,R.id.btn_calllogs,R.id.btn_reptilian,R.id.btn_tabActivity,R.id.btn_calculator,
+                                    R.id.btn_faceRecognite};
     //                              桌面悬浮框           WebView拦截                3D菜单           定时更新        滑动解锁                 绘制几何图形
     //                              仪表盘                动态更改app桌面图标  图灵机器人          身份证查询        谷歌翻译                 PDA扫描
     //                              简易钢琴              表情雨              shape              支付宝语音            诗经             论语            宋词
-    //                              唐诗              字符画（图片变成字符集显示） tab底部菜单  打字效果
+    //                              唐诗              字符画（图片变成字符集显示） tab底部菜单  打字效果       基础控件shape等的自定义
+    //                              NBA赛事            通话记录          爬虫              tabhost中activity的相互跳转    计算器
+    //                              人脸识别
     //所有点击id对应要跳转的页面
     private Class [] classes = new Class[]{FloatWindowTest.class,WebViewIntercept.class,Menu3D.class,TimingUpdate.class,PatternLocks.class,IsometricActivity.class,
                                     RecyclerviewrActivity.class,ChangeIconActivity.class,TulingRobotActivity.class,IdCardActivity.class,GoogleTranslateActivity.class,PDAScanActivity.class,
                                     SimplePiano.class,EmojeRainActivity.class,SelShape.class,AliPayVoice.class,ShiJingActivity.class,LunyuActivity.class,SongCiActivity.class,
-                                    TangShiActivity.class,PicAsciiActivity.class,TabHostActivity.class,TypingWordActivity.class};
+                                    TangShiActivity.class,PicAsciiActivity.class,TabHostActivity.class,TypingWordActivity.class,RWidgerHelperActivity.class,
+                                    NBASportActivity.class,CallLogActivity.class,ReptilianActivity.class,TabToActivity.class,CalculatorActivity.class,
+                                    FaceRecognitionActivity.class};
     public static RequestQueue mQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

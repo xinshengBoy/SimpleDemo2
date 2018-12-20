@@ -5,10 +5,14 @@
     <!--权限申请声明-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/><!--弹出对话框-->
     <uses-permission android:name="android.permission.INTERNET"/><!--网络-->
-    <uses-permission android:name="android.permission.CAMERA"/><!--拍照及调用相册权限-->
+    <uses-permission android:name="android.permission.CAMERA"/><!--拍照-->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" /><!--自动对焦-->
     <!--读写磁盘权限-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/><!--获取通话记录-->
+    <uses-permission android:name="android.permission.CALL_PHONE"/><!--拨打电话-->
 
     <application
         android:allowBackup="true"
@@ -76,6 +80,15 @@
         <activity android:name=".activity.PickedListActivity"/>
         <activity android:name=".activity.PickingActivity"/>
         <activity android:name=".activity.TypingWordActivity"/>
+        <activity android:name=".activity.RWidgerHelperActivity" />
+        <activity android:name=".activity.NBASportActivity" />
+        <activity android:name=".activity.CallLogActivity" />
+        <activity android:name=".activity.ReptilianActivity" />
+        <activity android:name=".activity.FirstGroupTab" />
+        <activity android:name=".activity.SecondTab" />
+        <activity android:name=".activity.TabToActivity" />
+        <activity android:name=".activity.CalculatorActivity" />
+        <activity android:name=".activity.FaceRecognitionActivity" />
     </application>
 
 </manifest>
