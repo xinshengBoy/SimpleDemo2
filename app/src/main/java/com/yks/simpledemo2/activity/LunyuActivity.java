@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.LunyuBean;
+import com.yks.simpledemo2.tools.Info;
 import com.yks.simpledemo2.widget.MyActionBar;
 
 import java.io.BufferedReader;
@@ -22,16 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 描述：
- * 作者：
+ * 描述：论语
+ * 作者：zzh
  * time:2018/09/29
  */
 
 public class LunyuActivity extends Activity {
 
-    private RecyclerView recycler_lunyu;
     private List<LunyuBean> mList = new ArrayList<>();
-    private com.zhy.adapter.recyclerview.CommonAdapter<LunyuBean> adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,7 @@ public class LunyuActivity extends Activity {
     }
 
     private void initView() {
+        Info.setActionBar(LunyuActivity.this,R.id.headerLayout,"论语");
         //// TODO: 2016/12/21 actionbar
         LinearLayout headerLayout = findViewById(R.id.headerLayout);
         Bundle bundle = new Bundle();
@@ -51,18 +52,18 @@ public class LunyuActivity extends Activity {
         bundle.putString("rightText", null);
         MyActionBar.actionbar(this,headerLayout,bundle);
 
-        recycler_lunyu = findViewById(R.id.view_recycler_lunyu);
+        RecyclerView recycler_lunyu = findViewById(R.id.view_recycler_lunyu);
         //横向滚动
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_lunyu.setLayoutManager(manager);
         initData();
         //设置适配器
-        adapter = new com.zhy.adapter.recyclerview.CommonAdapter<LunyuBean>(LunyuActivity.this,R.layout.item_lunyu,mList) {
+        com.zhy.adapter.recyclerview.CommonAdapter<LunyuBean> adapter = new com.zhy.adapter.recyclerview.CommonAdapter<LunyuBean>(LunyuActivity.this, R.layout.item_lunyu, mList) {
             @Override
             protected void convert(com.zhy.adapter.recyclerview.base.ViewHolder holder, LunyuBean lunyuBean, int position) {
-                holder.setText(R.id.txt_item_lunyu_chapter,lunyuBean.getChapter());
-                holder.setText(R.id.txt_item_lunyu_content,lunyuBean.getParagraphs());
+                holder.setText(R.id.txt_item_lunyu_chapter, lunyuBean.getChapter());
+                holder.setText(R.id.txt_item_lunyu_content, lunyuBean.getParagraphs());
             }
         };
         recycler_lunyu.setAdapter(adapter);

@@ -8,12 +8,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.SongCiBean;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,9 +28,8 @@ import java.util.List;
 
 public class SongCiActivity extends Activity {
 
-    private RecyclerView recycler_songci;
     private List<SongCiBean> mList = new ArrayList<>();
-    private com.zhy.adapter.recyclerview.CommonAdapter<SongCiBean> adapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,29 +39,21 @@ public class SongCiActivity extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "宋词");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(this,R.id.headerLayout,"宋词");
 
-        recycler_songci = findViewById(R.id.view_recycler_songci);
+        RecyclerView recycler_songci = findViewById(R.id.view_recycler_songci);
         //横向滚动
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler_songci.setLayoutManager(manager);
         initData();
         //设置适配器
-        adapter = new com.zhy.adapter.recyclerview.CommonAdapter<SongCiBean>(SongCiActivity.this,R.layout.item_songci,mList) {
+        com.zhy.adapter.recyclerview.CommonAdapter<SongCiBean> adapter = new com.zhy.adapter.recyclerview.CommonAdapter<SongCiBean>(SongCiActivity.this, R.layout.item_songci, mList) {
             @Override
             protected void convert(com.zhy.adapter.recyclerview.base.ViewHolder holder, SongCiBean songCiBean, int position) {
-                holder.setText(R.id.txt_item_songci_title,songCiBean.getRhythmic());
-                holder.setText(R.id.txt_item_songci_author,songCiBean.getAuthor());
-                holder.setText(R.id.txt_item_songci_content,songCiBean.getParagraphs());
+                holder.setText(R.id.txt_item_songci_title, songCiBean.getRhythmic());
+                holder.setText(R.id.txt_item_songci_author, songCiBean.getAuthor());
+                holder.setText(R.id.txt_item_songci_content, songCiBean.getParagraphs());
             }
         };
         recycler_songci.setAdapter(adapter);

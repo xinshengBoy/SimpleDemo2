@@ -6,11 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.android.qzs.voiceannouncementlibrary.VoiceUtils;
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -32,15 +31,7 @@ public class AliPayVoice extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "支付宝语音播报");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(AliPayVoice.this,R.id.headerLayout,"支付宝语音播报");
 
         et_input = findViewById(R.id.et_alipay_input);
         btn_speak = findViewById(R.id.btn_alipay_speak);
@@ -55,6 +46,7 @@ public class AliPayVoice extends Activity implements View.OnClickListener{
             if (input.equals("")){
                 LemonBubble.showError(AliPayVoice.this,"请输入金额",2000);
             }else {
+                Info.hideKeyboard(AliPayVoice.this,et_input);
                 VoiceUtils.with(AliPayVoice.this).Play(input,true);
             }
         }

@@ -7,10 +7,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -19,11 +19,10 @@ import com.bumptech.glide.Glide;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.NBASport;
 import com.yks.simpledemo2.tools.CommonAdapter;
+import com.yks.simpledemo2.tools.Info;
 import com.yks.simpledemo2.tools.ViewHolder;
-import com.yks.simpledemo2.widget.MyActionBar;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
-import net.lemonsoft.lemonhello.LemonHello;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,12 +39,13 @@ import java.util.List;
  */
 
 public class NBASportActivity extends Activity implements View.OnClickListener{
-
+    private Activity mActivity = NBASportActivity.this;
     private GridView list_nba_daily;
     private ImageView iv_nba_refresh;
     private List<NBASport> mList = new ArrayList<>();
     private final int GETSPORTSUCCESS = 0;
     private final int GETSPORTFAIL = 1;
+    private boolean isProgressShow = false;//加载进度条是否在显示
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,24 +56,75 @@ public class NBASportActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "NBA每日赛程结果");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(mActivity,R.id.headerLayout,"NBA每日赛程结果");
 
         list_nba_daily = findViewById(R.id.list_nba_daily);
         iv_nba_refresh = findViewById(R.id.iv_nba_refresh);
         iv_nba_refresh.setOnClickListener(this);
     }
 
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == GETSPORTSUCCESS){//获取nba每日赛果成功
+                LemonBubble.hide();
+                isProgressShow = false;
+                list_nba_daily.setAdapter(new SportAdapter(NBASportActivity.this,mList,R.layout.item_nba_sport));
+            }else if (msg.what == GETSPORTFAIL){//获取nba每日赛果失败
+                Bundle bundle = msg.getData();
+                LemonBubble.showError(NBASportActivity.this,bundle.getString("error"),1500);
+                isProgressShow = false;
+            }
+        }
+    };
+
+    @Override
+    public void onClick(View view) {
+        if (view == iv_nba_refresh){
+            mList.clear();
+            initData();
+        }
+    }
+
+    private class SportAdapter extends CommonAdapter<NBASport>{
+
+        public SportAdapter(Context context, List<NBASport> mDatas, int itemLayoutId) {
+            super(context, mDatas, itemLayoutId);
+        }
+
+        @Override
+        public void convert(ViewHolder helper, NBASport item) {
+            ImageView iv_home_logo = helper.getView(R.id.iv_home_logo);
+            ImageView iv_custom_logo = helper.getView(R.id.iv_custom_logo);
+            TextView homename = helper.getView(R.id.txt_item_nba_homename);
+            TextView customname = helper.getView(R.id.txt_item_nba_customname);
+            TextView status = helper.getView(R.id.txt_item_nbastatus);
+            TextView score = helper.getView(R.id.txt_item_nba_score);
+            TextView gameTime = helper.getView(R.id.txt_item_nba_time);
+
+            Glide.with(NBASportActivity.this).load(item.getHomeLogo()).into(iv_home_logo);
+            Glide.with(NBASportActivity.this).load(item.getCustomLogo()).into(iv_custom_logo);
+
+            homename.setText(item.getHomeTeam());
+            customname.setText(item.getCustomTeam());
+            score.setText(item.getScore());
+            gameTime.setText(item.getTime());
+            String gameStatus = item.getStatus();
+            if (gameStatus.equals("0")){
+                status.setText("未开赛");
+            }else if (gameStatus.equals("1")){
+                status.setText("直播中");
+            }else {
+                status.setText("已结束");
+            }
+        }
+    }
+
     private void initData(){
         LemonBubble.showRoundProgress(NBASportActivity.this,"加载中...");
-        String url = "https://api.avatardata.cn/Nba/NomalRace?key=1ba1fc4f9d634fa9a58bd77c993dec2d&dtype=JSON&format=true";
+        isProgressShow = true;
+        String url = "https://api.avatardata.cn/Nba/NomalRace?key=5f9d54d09cc5448f966f9c326d85ccbd&dtype=JSON&format=true";
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             try {
                 JSONObject object = new JSONObject(response);
@@ -123,59 +174,27 @@ public class NBASportActivity extends Activity implements View.OnClickListener{
         MainActivity.mQueue.add(request);
     }
 
-    private final Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == GETSPORTSUCCESS){//获取nba每日赛果成功
-                LemonBubble.hide();
-                list_nba_daily.setAdapter(new SportAdapter(NBASportActivity.this,mList,R.layout.item_nba_sport));
-            }else if (msg.what == GETSPORTFAIL){//获取nba每日赛果失败
-                Bundle bundle = msg.getData();
-                LemonHello.getErrorHello("失败",bundle.getString("error"));
-            }
-        }
-    };
-
     @Override
-    public void onClick(View view) {
-        if (view == iv_nba_refresh){
+    protected void onDestroy() {
+        super.onDestroy();
+        LemonBubble.forceHide();
+        handler.removeCallbacksAndMessages(null);
+        if (mList != null && mList.size() != 0){
             mList.clear();
-            initData();
+            mList = null;
         }
     }
 
-    private class SportAdapter extends CommonAdapter<NBASport>{
-
-        public SportAdapter(Context context, List<NBASport> mDatas, int itemLayoutId) {
-            super(context, mDatas, itemLayoutId);
-        }
-
-        @Override
-        public void convert(ViewHolder helper, NBASport item) {
-            ImageView iv_home_logo = helper.getView(R.id.iv_home_logo);
-            ImageView iv_custom_logo = helper.getView(R.id.iv_custom_logo);
-            TextView homename = helper.getView(R.id.txt_item_nba_homename);
-            TextView customname = helper.getView(R.id.txt_item_nba_customname);
-            TextView status = helper.getView(R.id.txt_item_nbastatus);
-            TextView score = helper.getView(R.id.txt_item_nba_score);
-            TextView gameTime = helper.getView(R.id.txt_item_nba_time);
-
-            Glide.with(NBASportActivity.this).load(item.getHomeLogo()).into(iv_home_logo);
-            Glide.with(NBASportActivity.this).load(item.getCustomLogo()).into(iv_custom_logo);
-
-            homename.setText(item.getHomeTeam());
-            customname.setText(item.getCustomTeam());
-            score.setText(item.getScore());
-            gameTime.setText(item.getTime());
-            String gameStatus = item.getStatus();
-            if (gameStatus.equals("0")){
-                status.setText("未开赛");
-            }else if (gameStatus.equals("1")){
-                status.setText("直播中");
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (isProgressShow){
+                LemonBubble.forceHide();
             }else {
-                status.setText("已结束");
+                this.finish();
             }
+            return true;
         }
+        return super.onKeyDown(keyCode, event);
     }
 }

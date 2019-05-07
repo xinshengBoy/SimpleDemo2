@@ -23,7 +23,6 @@ import android.support.v4.print.PrintHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.yanzhenjie.permission.AndPermission;
@@ -32,7 +31,7 @@ import com.yanzhenjie.permission.PermissionListener;
 import com.yanzhenjie.permission.Rationale;
 import com.yanzhenjie.permission.RationaleListener;
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -65,15 +64,7 @@ public class FaceRecognitionActivity extends Activity implements View.OnClickLis
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "人脸识别");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(FaceRecognitionActivity.this,R.id.headerLayout,"人脸识别");
 
         iv_facerecognite = findViewById(R.id.iv_facerecognite);
         btn_takephote = findViewById(R.id.btn_takephote);

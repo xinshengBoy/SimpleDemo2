@@ -3,12 +3,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--actionbar-->
-    <LinearLayout
+    <include
         android:id="@+id/headerLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:orientation="vertical" />
+        layout="@layout/layout_header"/>
     <!--tap bar样式的菜单-->
     <com.michaldrabik.tapbarmenulib.TapBarMenu
         android:id="@+id/menu_tapbar"

@@ -1,8 +1,15 @@
 package com.yks.simpledemo2.tools;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import com.yks.simpledemo2.widget.MyActionBar;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -85,5 +92,41 @@ public class Info {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static void setActionBar(Activity activity,int id,String title){
+        //// TODO: 2016/12/21 actionbar
+        LinearLayout headerLayout = activity.findViewById(id);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("back", true);
+        bundle.putString("leftText", null);
+        bundle.putString("title", title);
+        bundle.putBoolean("rightImage", false);
+        bundle.putString("rightText", null);
+        MyActionBar.actionbar(activity,headerLayout,bundle);
+    }
+
+    public static void setActionBar(Activity activity,int id,String title,String rightText){
+        //// TODO: 2016/12/21 actionbar
+        LinearLayout headerLayout = activity.findViewById(id);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("back", true);
+        bundle.putString("leftText", null);
+        bundle.putString("title", title);
+        bundle.putBoolean("rightImage", true);
+        bundle.putString("rightText", rightText);
+        MyActionBar.actionbar(activity,headerLayout,bundle);
+    }
+
+    /**
+     * 描述：隐藏软键盘
+     * 作者：zzh
+     * @param v 要显示的输入框
+     */
+    public static void hideKeyboard(Context context, EditText v){
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()){
+            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
+        }
     }
 }

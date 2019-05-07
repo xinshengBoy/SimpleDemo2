@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import net.lemonsoft.lemonhello.LemonHello;
 
@@ -34,15 +33,7 @@ public class SimplePiano extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "简易钢琴");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(this,R.id.headerLayout,"简易钢琴");
 
         btn_piano1 = findViewById(R.id.btn_piano1);
         btn_piano2 = findViewById(R.id.btn_piano2);

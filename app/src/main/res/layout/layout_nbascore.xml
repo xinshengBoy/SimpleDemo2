@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/headerLayout"
+        layout="@layout/layout_header"/>
+    <!--标题头部分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!--左侧标题父容器-->
+        <LinearLayout
+            android:id="@+id/left_title_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <include layout="@layout/layout_title_left"/>
+        </LinearLayout>
+        <!--右侧标题的父容器，可水平滚动-->
+        <com.yks.simpledemo2.widget.MyHorizontalScrollView
+            android:id="@+id/title_horsv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/right_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <include layout="@layout/layout_tab_right"/>
+            </LinearLayout>
+        </com.yks.simpledemo2.widget.MyHorizontalScrollView>
+    </LinearLayout>
+
+    <!--这是内容部分，用scrollview实现上下联动的滚动效果-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- 左侧内容的父容器 -->
+            <LinearLayout
+                android:id="@+id/left_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
+                <ListView
+                    android:id="@+id/lv_left_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"/>
+            </LinearLayout>
+            <!-- 右侧内容的父容器 -->
+            <com.yks.simpledemo2.widget.MyHorizontalScrollView
+                android:id="@+id/content_horsv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/right_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ListView
+                        android:id="@+id/lv_right_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none"/>
+                </LinearLayout>
+            </com.yks.simpledemo2.widget.MyHorizontalScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

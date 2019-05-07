@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -29,15 +28,7 @@ public class ReptilianActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_reptilian);
 
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "爬虫");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this, headerLayout, bundle);
+        Info.setActionBar(ReptilianActivity.this,R.id.headerLayout,"爬虫");
 
         EditText et_reptilian = findViewById(R.id.et_reptilian);
         Button btn_reptilians = findViewById(R.id.btn_reptilians);

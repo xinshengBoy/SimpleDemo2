@@ -7,12 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFD0D2CE">
-    <!--actionbar-->
-    <LinearLayout
+    <include
         android:id="@+id/headerLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:orientation="vertical" />
+        layout="@layout/layout_header"/>
     <TextView
         android:id="@+id/txt_calculator_input"
         android:layout_width="match_parent"

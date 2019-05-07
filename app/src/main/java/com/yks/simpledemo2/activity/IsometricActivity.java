@@ -3,10 +3,9 @@ package com.yks.simpledemo2.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import io.fabianterhorst.isometric.Color;
 import io.fabianterhorst.isometric.IsometricView;
@@ -33,15 +32,7 @@ public class IsometricActivity extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "几何图形");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(IsometricActivity.this,R.id.headerLayout,"几何图形");
 
         isometric1 = findViewById(R.id.view_isometric1);
         isometric2 = findViewById(R.id.view_isometric2);

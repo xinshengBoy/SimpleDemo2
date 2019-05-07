@@ -3,22 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <!--actionbar-->
-    <LinearLayout
+    <include
         android:id="@+id/headerLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:orientation="vertical" />
+        layout="@layout/layout_header"/>
     <TextView
-        android:id="@+id/txt_kotlin"
+        android:id="@+id/txt_lrc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/btn_creatKotlin"
+        android:id="@+id/btn_lrcStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Kotlin"/>
+        android:text="解析"
+        android:background="@drawable/submit_bg"
+        android:layout_margin="5dp"/>
 </LinearLayout>

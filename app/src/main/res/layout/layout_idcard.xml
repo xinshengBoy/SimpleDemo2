@@ -3,12 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <!--actionbar-->
-    <LinearLayout
+    <include
         android:id="@+id/headerLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:orientation="vertical" />
+        layout="@layout/layout_header"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

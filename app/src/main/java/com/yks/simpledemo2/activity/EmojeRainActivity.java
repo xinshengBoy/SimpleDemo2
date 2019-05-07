@@ -7,11 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
+import com.yks.simpledemo2.tools.Info;
 import com.yks.simpledemo2.widget.BadgeView;
-import com.yks.simpledemo2.widget.MyActionBar;
 import com.yks.simpledemo2.widget.RainView;
 
 import net.lemonsoft.lemonhello.LemonHello;
@@ -38,15 +37,7 @@ public class EmojeRainActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "表情雨");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(EmojeRainActivity.this,R.id.headerLayout,"表情雨");
 
         view_emojerain = findViewById(R.id.view_emojerain);
         et_emojeCount = findViewById(R.id.et_emojeCount);

@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -28,15 +27,7 @@ public class TimingUpdate extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_timing_update);
 
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = (LinearLayout)findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "定时更新");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(this,R.id.headerLayout,"定时更新");
 
         txt_timing_update1 = findViewById(R.id.txt_timing_update1);
         txt_timing_update2 = findViewById(R.id.txt_timing_update2);

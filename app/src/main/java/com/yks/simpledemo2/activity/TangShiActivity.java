@@ -8,12 +8,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.TangShiBean;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,15 +39,7 @@ public class TangShiActivity extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "唐诗");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(this,R.id.headerLayout,"唐诗");
 
         RecyclerView recycler_tangshi = findViewById(R.id.view_recycler_tangshi);
         //横向滚动

@@ -9,11 +9,10 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 /**
  * 描述：webview拦截特定的信息(如广告等)
@@ -31,15 +30,8 @@ public class WebViewIntercept extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_intercept_webview);
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = (LinearLayout)findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "webview拦截");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+
+        Info.setActionBar(this,R.id.headerLayout,"WebView拦截");
         initView();
     }
 

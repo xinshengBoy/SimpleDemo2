@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 /**
  * 描述：动态更改桌面图标
@@ -33,15 +32,7 @@ public class ChangeIconActivity extends Activity implements View.OnClickListener
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "更换图标");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(ChangeIconActivity.this,R.id.headerLayout,"更换图标");
 
         btn_changeicon_init = findViewById(R.id.btn_changeicon_init);
         btn_changeicon_11 = findViewById(R.id.btn_changeicon_11);

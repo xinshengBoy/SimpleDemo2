@@ -3,14 +3,12 @@ package com.yks.simpledemo2.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.LinearLayout;
 
 import com.andrognito.patternlockview.PatternLockView;
 import com.andrognito.patternlockview.listener.PatternLockViewListener;
 import com.andrognito.patternlockview.utils.PatternLockUtils;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
-import com.yks.simpledemo2.widget.MyActionBar;
 
 import java.util.List;
 
@@ -33,15 +31,7 @@ public class PatternLocks extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "滑动解锁");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(PatternLocks.this,R.id.headerLayout,"滑动解锁");
 
         view_pattern_lock = findViewById(R.id.view_pattern_lock);
         view_pattern_lock.addPatternLockListener(listner);

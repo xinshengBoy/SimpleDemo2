@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.king.view.supertextview.SuperTextView;
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 /**
  * 描述：打字效果，textview控件
@@ -31,15 +30,7 @@ public class TypingWordActivity extends Activity implements View.OnClickListener
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "打字效果");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(this,R.id.headerLayout,"打字效果");
 
         superText = findViewById(R.id.superText);
         normal = findViewById(R.id.btn_superText_normal);

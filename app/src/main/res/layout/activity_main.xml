@@ -18,7 +18,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,6 +192,39 @@
                     android:id="@+id/btn_faceRecognite"
                     style="@style/baseRes"
                     android:text="人脸识别" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_lrc"
+                    style="@style/baseRes"
+                    android:text="歌词解析" />
+                <Button
+                    android:id="@+id/btn_countClock"
+                    style="@style/baseRes"
+                    android:text="倒计时" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_totalnbascore"
+                    style="@style/baseRes"
+                    android:text="球员数据统计" />
+                <Button
+                    android:id="@+id/btn_elemeDinner"
+                    style="@style/baseRes"
+                    android:text="饿了么外卖" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_myrecycleview"
+                    style="@style/baseRes"
+                    android:text="recycleview" />
+                <Button
+                    android:id="@+id/btn_hTextView"
+                    style="@style/baseRes"
+                    android:text="HTextView" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

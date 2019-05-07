@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -16,7 +15,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.photoview.PhotoView;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.CommonUtil;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -53,15 +52,7 @@ public class PicAsciiActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "图片转字符集");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(PicAsciiActivity.this,R.id.headerLayout,"图片转字符集");
 
         btn_pic_black = findViewById(R.id.btn_pic_black);
         btn_pic_color = findViewById(R.id.btn_pic_color);

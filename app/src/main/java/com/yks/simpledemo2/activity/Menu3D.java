@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 /**
  * 描述：3D菜单
@@ -28,15 +27,7 @@ public class Menu3D extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_3d_menu);
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = (LinearLayout)findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "3D菜单");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(Menu3D.this,R.id.headerLayout,"3D菜单");
         initView();
     }
 

@@ -10,13 +10,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.RecyclerBean;
 import com.yks.simpledemo2.tools.Info;
-import com.yks.simpledemo2.widget.MyActionBar;
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
@@ -49,15 +47,7 @@ public class RecyclerviewrActivity extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "RecyclerView");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(RecyclerviewrActivity.this,R.id.headerLayout,"RecyclerView");
 
         view_swipe = findViewById(R.id.view_swipe);
         view_recycler = findViewById(R.id.view_recycler);

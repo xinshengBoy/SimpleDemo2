@@ -17,15 +17,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.CallLogs;
 import com.yks.simpledemo2.tools.CommonAdapter;
+import com.yks.simpledemo2.tools.Info;
 import com.yks.simpledemo2.tools.ViewHolder;
-import com.yks.simpledemo2.widget.MyActionBar;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -134,15 +133,7 @@ public class CallLogActivity extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "通话记录");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this, headerLayout, bundle);
+        Info.setActionBar(CallLogActivity.this,R.id.headerLayout,"通话记录");
 
         list_calllog = findViewById(R.id.list_calllog);
         list_calllog.setOnItemClickListener(new AdapterView.OnItemClickListener() {

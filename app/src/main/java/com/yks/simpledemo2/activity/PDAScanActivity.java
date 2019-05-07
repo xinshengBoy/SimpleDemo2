@@ -11,10 +11,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
-import com.yks.simpledemo2.widget.MyActionBar;
+import com.yks.simpledemo2.tools.Info;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
@@ -42,15 +41,7 @@ public class PDAScanActivity extends Activity {
     }
 
     private void initView() {
-        //// TODO: 2016/12/21 actionbar
-        LinearLayout headerLayout = findViewById(R.id.headerLayout);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("back", true);
-        bundle.putString("leftText", null);
-        bundle.putString("title", "PDA扫描");
-        bundle.putBoolean("rightImage", false);
-        bundle.putString("rightText", null);
-        MyActionBar.actionbar(this,headerLayout,bundle);
+        Info.setActionBar(PDAScanActivity.this,R.id.headerLayout,"PDA扫描");
 
         et_pdascan = findViewById(R.id.et_pdascan);
     }

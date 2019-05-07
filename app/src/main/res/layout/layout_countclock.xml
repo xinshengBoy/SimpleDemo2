@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/headerLayout"
+        layout="@layout/layout_header"/>
+    <TextView
+        android:id="@+id/txt_countclock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="倒计时"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+    <Button
+        android:id="@+id/btn_start_countclock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:background="@drawable/bg_button"
+        android:gravity="center"
+        android:layout_margin="8dp"/>
+</LinearLayout>
