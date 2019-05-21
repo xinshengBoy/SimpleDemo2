@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -13,6 +14,10 @@ import com.yks.simpledemo2.widget.MyActionBar;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
@@ -128,5 +133,49 @@ public class Info {
         if (imm.isActive()){
             imm.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
         }
+    }
+
+    /**
+     * 描述：请求接口时页面显示的转圈等待画面
+     * 作者：zzh
+     * @param context 上下文
+     * @param msg 要显示的文字
+     */
+    public static void showProgress(Context context,String msg){
+        LemonBubble.showRoundProgress(context,msg);
+    }
+
+    /**
+     * 描述：将图片转为base64字符集
+     * @param path 图片路径
+     * @return 图片字符集
+     */
+    public static String imageToBase64(String path){
+        if (TextUtils.isEmpty(path)){
+            return null;
+        }
+        InputStream is = null;
+        byte[] data = null;
+        String result = null;
+        try {
+            is = new FileInputStream(path);
+            //创建一个字符流大小的数组
+            data = new byte[is.available()];
+            is.read(data);
+            result = Base64.encodeToString(data,Base64.DEFAULT);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (null != is){
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }

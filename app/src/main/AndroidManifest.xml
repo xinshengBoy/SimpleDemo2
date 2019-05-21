@@ -24,13 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.FloatWindowTest"/>
         <activity android:name=".activity.WebViewIntercept"/>
         <activity android:name=".activity.Menu3D"/>
@@ -96,8 +98,12 @@
         <activity android:name=".activity.CountClockActivity" />
         <activity android:name=".activity.TotalNBAScoreActivity" />
         <activity android:name=".activity.ElemeActivity" />
-        <activity android:name=".activity.MyRecycleView" />
+        <activity android:name=".activity.AnimationActivity" />
         <activity android:name=".activity.HTextViewActivity" />
+        <activity android:name=".activity.RedPointListActivity" />
+        <activity android:name=".activity.CountStepActivity" />
+        <activity android:name=".activity.OrcTestActivity" />
+        <activity android:name=".activity.DownContinueActivity" />
     </application>
 
 </manifest>

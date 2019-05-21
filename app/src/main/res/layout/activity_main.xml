@@ -218,13 +218,35 @@
             <LinearLayout style="@style/baseLinearlayout">
 
                 <Button
-                    android:id="@+id/btn_myrecycleview"
+                    android:id="@+id/btn_animation"
                     style="@style/baseRes"
-                    android:text="recycleview" />
+                    android:text="动画" />
                 <Button
                     android:id="@+id/btn_hTextView"
                     style="@style/baseRes"
                     android:text="HTextView" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_redpoint"
+                    style="@style/baseRes"
+                    android:text="小红点" />
+                <Button
+                    android:id="@+id/btn_countstep"
+                    style="@style/baseRes"
+                    android:text="计步器" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_ocrtest"
+                    style="@style/baseRes"
+                    android:text="文字识别" />
+                <Button
+                    android:id="@+id/btn_dowmcontinue"
+                    style="@style/baseRes"
+                    android:text="边下边播" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

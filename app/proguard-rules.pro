@@ -30,3 +30,6 @@
 #okio
 -dontwarn okio.**
 -keep class okio.**{*;}
+#百度语音混淆
+-keep class com.baidu.tts.**{*;}
+-keep class com.baidu.speechsynthesizer.**{*;}
