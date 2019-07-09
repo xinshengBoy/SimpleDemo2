@@ -3,6 +3,8 @@ package com.yks.simpledemo2.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,6 +29,7 @@ import com.baidu.tts.client.TtsMode;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
+import com.yks.simpledemo2.tools.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -231,12 +234,14 @@ public class OrcTestActivity extends Activity implements View.OnClickListener, S
                 }else if (msg.what == ORCSUCCESS){//todo 识别成功
                     LemonBubble.hide();
                     txt_orcresult.setText(result);
+                    boolean isSuccess = copyToBoard(result);
                     LemonHello.getSuccessHello("成功",result).addAction(new LemonHelloAction("确定", new LemonHelloActionDelegate() {
                         @Override
                         public void onClick(LemonHelloView lemonHelloView, LemonHelloInfo lemonHelloInfo, LemonHelloAction lemonHelloAction) {
                             lemonHelloView.hide();
                         }
                     })).show(mContext);
+                    ToastUtils.show(mContext,isSuccess ? "内容已复制到剪切板" : "未复制到剪切板");
                 }
             }
 
@@ -352,6 +357,22 @@ public class OrcTestActivity extends Activity implements View.OnClickListener, S
                         }
                     }
                 });
+    }
+
+    /**
+     * 描述：复制到剪切板
+     * 作者：zzh
+     * @param coptstr 要复制的内容
+     */
+    private boolean copyToBoard(String coptstr){
+        try {
+            ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData data = ClipData.newPlainText("Label",coptstr);
+            cm.setPrimaryClip(data);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     /**

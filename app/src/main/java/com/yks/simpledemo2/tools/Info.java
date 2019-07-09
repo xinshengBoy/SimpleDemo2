@@ -2,6 +2,9 @@ package com.yks.simpledemo2.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -43,7 +46,40 @@ public class Info {
             LemonBubble.showError(context, msg, 1500);
         }
     }
-
+    /**
+     * 播放扫描结果的对比
+     * @param context 上下文
+     * @param success 是否成功
+     */
+    public static void playRingtone(Context context, boolean success) {
+        try {
+            AssetManager assetManager = context.getAssets();
+            AssetFileDescriptor afd;
+            if (success) {
+                afd = assetManager.openFd("success.mp3");
+            } else {
+                afd = assetManager.openFd("fail.mp3");
+            }
+            MediaPlayer player = new MediaPlayer();
+            if (player.isPlaying()){
+                player.reset();
+            }
+            player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+//            player.setDataSource(afd.getFileDescriptor());
+            player.setLooping(false);//循环播放
+            player.prepare();
+            player.start();
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    mediaPlayer.reset();//播放完成后及时释放资源
+                    mediaPlayer.release();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 描述：打印输出
      * 作者：zzh

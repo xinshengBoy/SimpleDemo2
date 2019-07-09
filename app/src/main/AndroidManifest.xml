@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG"/><!--获取通话记录-->
     <uses-permission android:name="android.permission.CALL_PHONE"/><!--拨打电话-->
     <uses-permission android:name="android.permission.VIBRATE"/><!--震动-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/><!--录音-->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/><!--保活-->
 
     <application
         android:allowBackup="true"
@@ -104,6 +106,12 @@
         <activity android:name=".activity.CountStepActivity" />
         <activity android:name=".activity.OrcTestActivity" />
         <activity android:name=".activity.DownContinueActivity" />
+        <activity android:name=".activity.AlgorithmActivity" />
+        <activity android:name=".activity.ScaleImageActivity" />
+        <activity android:name=".activity.ThirdPartyActivity" />
+        <activity android:name=".activity.AudioRecordActivity" />
+        <activity android:name=".activity.ShapeAttributeActivity" />
+        <activity android:name=".activity.ChannelSortActivity" />
     </application>
 
 </manifest>

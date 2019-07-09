@@ -31,7 +31,8 @@ public class MainActivity extends Activity {
                                     R.id.btn_nbasport,R.id.btn_calllogs,R.id.btn_reptilian,R.id.btn_tabActivity,R.id.btn_calculator,
                                     R.id.btn_faceRecognite,R.id.btn_lrc,R.id.btn_countClock,R.id.btn_totalnbascore,R.id.btn_elemeDinner,
                                     R.id.btn_animation,R.id.btn_hTextView,R.id.btn_redpoint,R.id.btn_countstep,R.id.btn_ocrtest,
-                                    R.id.btn_dowmcontinue};
+                                    R.id.btn_dowmcontinue,R.id.btn_algorithm,R.id.btn_scale_image,R.id.btn_third_party,R.id.btn_audio_record,
+                                    R.id.btn_shape_attribute,R.id.btn_channel_sort};
     //                              桌面悬浮框           WebView拦截                3D菜单           定时更新        滑动解锁                 绘制几何图形
     //                              仪表盘                动态更改app桌面图标  图灵机器人          身份证查询        谷歌翻译                 PDA扫描
     //                              简易钢琴              表情雨              shape              支付宝语音            诗经             论语            宋词
@@ -39,7 +40,8 @@ public class MainActivity extends Activity {
     //                              NBA赛事            通话记录          爬虫              tabhost中activity的相互跳转    计算器
     //                              人脸识别              歌词解析      倒计时             球员数据统计              仿饿了么外卖点餐
     //                              动画                   HTextView的使用      小红点             计步器             文字识别
-    //                              边下边播
+    //                              边下边播                算法              图片缩放            第三方应用           录音及分贝
+    //                              所有shape属性               频道排序
     //所有点击id对应要跳转的页面
     private Class [] classes = new Class[]{FloatWindowTest.class,WebViewIntercept.class,Menu3D.class,TimingUpdate.class,PatternLocks.class,IsometricActivity.class,
                                     RecyclerviewrActivity.class,ChangeIconActivity.class,TulingRobotActivity.class,IdCardActivity.class,GoogleTranslateActivity.class,PDAScanActivity.class,
@@ -48,7 +50,8 @@ public class MainActivity extends Activity {
                                     NBASportActivity.class,CallLogActivity.class,ReptilianActivity.class,TabToActivity.class,CalculatorActivity.class,
                                     FaceRecognitionActivity.class,LrcActivity.class,CountClockActivity.class,TotalNBAScoreActivity.class,ElemeActivity.class,
                                     AnimationActivity.class,HTextViewActivity.class,RedPointListActivity.class,CountStepActivity.class,OrcTestActivity.class,
-                                    DownContinueActivity.class};
+                                    DownContinueActivity.class,AlgorithmActivity.class,ScaleImageActivity.class,ThirdPartyActivity.class,AudioRecordActivity.class,
+                                    ShapeAttributeActivity.class,ChannelSortActivity.class};
     public static RequestQueue mQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

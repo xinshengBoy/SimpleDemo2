@@ -248,6 +248,39 @@
                     style="@style/baseRes"
                     android:text="边下边播" />
             </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_algorithm"
+                    style="@style/baseRes"
+                    android:text="算法" />
+                <Button
+                    android:id="@+id/btn_scale_image"
+                    style="@style/baseRes"
+                    android:text="图片缩放" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_third_party"
+                    style="@style/baseRes"
+                    android:text="第三方应用" />
+                <Button
+                    android:id="@+id/btn_audio_record"
+                    style="@style/baseRes"
+                    android:text="录音及分贝" />
+            </LinearLayout>
+            <LinearLayout style="@style/baseLinearlayout">
+
+                <Button
+                    android:id="@+id/btn_shape_attribute"
+                    style="@style/baseRes"
+                    android:text="所有shape属性" />
+                <Button
+                    android:id="@+id/btn_channel_sort"
+                    style="@style/baseRes"
+                    android:text="频道排序" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
