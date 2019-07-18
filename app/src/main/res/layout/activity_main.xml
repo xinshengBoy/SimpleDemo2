@@ -112,9 +112,9 @@
                     style="@style/baseRes"
                     android:text="shape" />
                 <Button
-                    android:id="@+id/btn_r_helper"
+                    android:id="@+id/btn_shape_attribute"
                     style="@style/baseRes"
-                    android:text="基础控件定义" />
+                    android:text="所有shape属性" />
             </LinearLayout>
             <LinearLayout style="@style/baseLinearlayout">
 
@@ -269,17 +269,6 @@
                     android:id="@+id/btn_audio_record"
                     style="@style/baseRes"
                     android:text="录音及分贝" />
-            </LinearLayout>
-            <LinearLayout style="@style/baseLinearlayout">
-
-                <Button
-                    android:id="@+id/btn_shape_attribute"
-                    style="@style/baseRes"
-                    android:text="所有shape属性" />
-                <Button
-                    android:id="@+id/btn_channel_sort"
-                    style="@style/baseRes"
-                    android:text="频道排序" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

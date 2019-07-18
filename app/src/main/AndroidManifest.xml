@@ -87,7 +87,6 @@
         <activity android:name=".activity.PickedListActivity"/>
         <activity android:name=".activity.PickingActivity"/>
         <activity android:name=".activity.TypingWordActivity"/>
-        <activity android:name=".activity.RWidgerHelperActivity" />
         <activity android:name=".activity.NBASportActivity" />
         <activity android:name=".activity.CallLogActivity" />
         <activity android:name=".activity.ReptilianActivity" />
@@ -111,7 +110,6 @@
         <activity android:name=".activity.ThirdPartyActivity" />
         <activity android:name=".activity.AudioRecordActivity" />
         <activity android:name=".activity.ShapeAttributeActivity" />
-        <activity android:name=".activity.ChannelSortActivity" />
     </application>
 
 </manifest>
