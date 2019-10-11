@@ -14,8 +14,8 @@ import com.yks.simpledemo2.tools.Info;
 import net.lemonsoft.lemonbubble.LemonBubble;
 
 /**
- * 描述：
- * 作者：
+ * 描述：支付宝语音播报
+ * 作者：zzh
  * time:2018/09/28
  */
 

@@ -8,29 +8,29 @@
         layout="@layout/layout_header"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_margin="5dp">
         <EditText
             android:id="@+id/et_idcard"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:hint="请输入身份证号码"
-            android:background="@drawable/bg_button"
+            android:textColorHint="@color/color_69"
+            android:background="@drawable/edit_bg"
             android:textSize="18sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:paddingStart="10dp"/>
         <Button
             android:id="@+id/btn_idcard_search"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:text="查询"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:background="#FF46B7FC"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"/>
+            android:background="#FF118408"
+            android:layout_marginStart="5dp"/>
     </LinearLayout>
     <TextView
         android:id="@+id/txt_idcard_info"

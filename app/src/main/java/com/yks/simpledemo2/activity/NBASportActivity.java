@@ -89,7 +89,7 @@ public class NBASportActivity extends Activity implements View.OnClickListener{
 
     private class SportAdapter extends CommonAdapter<NBASport>{
 
-        public SportAdapter(Context context, List<NBASport> mDatas, int itemLayoutId) {
+        SportAdapter(Context context, List<NBASport> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
         }
 

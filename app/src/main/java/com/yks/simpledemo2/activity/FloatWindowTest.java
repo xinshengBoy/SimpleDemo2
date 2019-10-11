@@ -23,7 +23,7 @@ public class FloatWindowTest extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ImageView img = new ImageView(getApplicationContext());
-        img.setImageResource(R.mipmap.homes);
+        img.setImageResource(R.mipmap.emoje1);
 
         FloatWindow.with(getApplicationContext())
                 .setView(img)

@@ -34,7 +34,8 @@ public class PDAScanActivity extends Activity {
         setContentView(R.layout.layout_pdascan);
 
         IntentFilter filter = new IntentFilter();
-        filter.addAction("com.symbol.scanconfig.SCANDEMO");
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.addAction("com.yks.all.ACTION");
         registerReceiver(receiver,filter);
 
         initView();
@@ -53,7 +54,8 @@ public class PDAScanActivity extends Activity {
             if (msg.what == SCANSUCCESS){
                 if (!scanResult.equals("")){
                     et_pdascan.setText(scanResult);
-                    LemonBubble.showRight(PDAScanActivity.this,scanResult+"已扫描");
+                    et_pdascan.setSelection(et_pdascan.length());
+                    Info.playRingtone(PDAScanActivity.this,true);
                 }
             }
         }
@@ -66,16 +68,16 @@ public class PDAScanActivity extends Activity {
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.hasExtra("data")) {
-                scanResult = intent.getStringExtra("data");
-                handler.sendEmptyMessage(SCANSUCCESS);
-            }
+            Bundle b = intent.getExtras();
+            scanResult = b.getString("com.symbol.scanconfig.decode_data").trim();
+            handler.sendEmptyMessage(SCANSUCCESS);
         }
     };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        LemonBubble.forceHide();
         unregisterReceiver(receiver);
     }
 }

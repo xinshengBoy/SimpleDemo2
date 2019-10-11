@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include
         android:id="@+id/headerLayout"
         layout="@layout/layout_header"/>
-    <EditText
-        android:id="@+id/et_robot"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bg_button"
-        android:hint="请输入你的问题"
-        android:layout_margin="5dp"/>
-    <Button
-        android:id="@+id/btn_robot"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@+id/headerLayout"
+        android:layout_marginBottom="50dp">
+        <TextView
+            android:id="@+id/txt_tuling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" />
+    </ScrollView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="询问"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/bg_button"
-        android:gravity="center"
-        android:layout_margin="5dp"/>
-    <TextView
-        android:id="@+id/txt_tuling"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
-</LinearLayout>
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp">
+        <EditText
+            android:id="@+id/et_robot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="50dp"
+            android:background="@drawable/edit_bg"
+            android:hint="请输入你的问题"
+            android:textColorHint="@color/color_69"
+            android:paddingStart="10dp"/>
+        <Button
+            android:id="@+id/btn_robot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:text="发送"
+            android:textSize="18sp"
+            android:layout_marginStart="2dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_button"/>
+    </LinearLayout>
+</RelativeLayout>

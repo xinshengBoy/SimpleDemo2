@@ -1,9 +1,9 @@
 package com.yks.simpledemo2.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -11,20 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import net.lemonsoft.lemonhello.LemonHello;
+import net.lemonsoft.lemonbubble.LemonBubble;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.ref.WeakReference;
+
+import okhttp3.Call;
 
 /**
  * 描述：图灵只能机器人API对接
@@ -35,21 +35,23 @@ import org.json.JSONObject;
 
 public class TulingRobotActivity extends Activity implements View.OnClickListener{
 
+    private Context mContext = TulingRobotActivity.this;
+
+    private final int TULINGSUCCESS = 0;
+    private final int TULINGFAIL = 1;
+
     private EditText et_robot;
     private Button btn_robot;
     private TextView txt_tuling;
-    private RequestQueue mQueue;
-    private static int TULINGSUCCESS = 0;
-    private static int TULINGFAIL = 1;
     private String allWords = "";
+    private MyHandler handler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_tuling_robot);
 
-        //// TODO: 2017/4/18 用于请求数据
-        mQueue = Volley.newRequestQueue(getApplicationContext());
+        handler = new MyHandler(TulingRobotActivity.this);
         initView();
     }
 
@@ -69,21 +71,33 @@ public class TulingRobotActivity extends Activity implements View.OnClickListene
             if (!text.equals("")) {
                 getTulingInfo(text);
             }else {
-                LemonHello.getErrorHello("错误","请输入内容");
+                sendMessage(TULINGFAIL,"请输入内容");
             }
         }
     }
 
-    private final Handler handler = new Handler(Looper.getMainLooper()) {
+    private class MyHandler extends Handler {
+        final WeakReference<Activity> mWeakReference;
+
+        MyHandler(Activity activity) {
+            mWeakReference = new WeakReference<>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == TULINGSUCCESS){//获取回复成功
-                Bundle bundle = msg.getData();
-                txt_tuling.setText(bundle.getString("msg"));
+            if (mWeakReference.get() != null) {
+                if (msg.what == TULINGSUCCESS) {//获取回复成功
+                    txt_tuling.setText(allWords);
+                    Info.playRingtone(mContext, true);
+                } else if (msg.what == TULINGFAIL) {
+                    Bundle bundle = msg.getData();
+                    Info.showToast(mContext, bundle.getString("msg"), false);
+                    Info.playRingtone(mContext, false);
+                }
             }
         }
-    };
+    }
 
     /**
      * 描述：获取接口返回
@@ -114,40 +128,65 @@ public class TulingRobotActivity extends Activity implements View.OnClickListene
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONObject object = new JSONObject(response.toString());
-                    JSONObject object1 = object.getJSONObject("intent");
-                    String code = object1.getString("code");
-                    JSONArray array = object.getJSONArray("results");
-                    for (int i=0;i<array.length();i++){
-                        JSONObject object2 = array.getJSONObject(i);
-                        JSONObject object3 = object2.getJSONObject("values");
-                        String answer = object3.getString("text");
-                        if (code.equals("10004")){
-                            allWords += answer + "\n";
-                            Message message = new Message();
-                            message.what = TULINGSUCCESS;
-                            Bundle bundle = new Bundle();
-                            bundle.putString("msg",allWords);
-                            message.setData(bundle);
-                            handler.sendMessage(message);
-                        }else {
-                            LemonHello.getErrorHello("错误",answer);
+
+        OkHttpUtils.postString().url(url)
+                .content(object.toString())
+                .tag(this)
+                .build()
+                .connTimeOut(10000L)
+                .readTimeOut(10000L)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        sendMessage(TULINGFAIL,"失败1："+e);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject object = new JSONObject(response.toString());
+                            JSONObject object1 = object.getJSONObject("intent");
+                            String code = object1.getString("code");
+                            JSONArray array = object.getJSONArray("results");
+                            for (int i=0;i<array.length();i++){
+                                JSONObject object2 = array.getJSONObject(i);
+                                JSONObject object3 = object2.getJSONObject("values");
+                                String answer = object3.getString("text");
+                                if (code.equals("10004")){
+                                    allWords += answer + "\n";
+                                    handler.sendEmptyMessage(TULINGSUCCESS);
+                                }else {
+                                    sendMessage(TULINGFAIL,answer);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            sendMessage(TULINGFAIL,"失败2："+e);
                         }
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                });
+    }
 
-            }
-        });
-        mQueue.add(request);
+    /**
+     * 描述：发handler消息
+     * 作者：zzh
+     * @param id 需要进入到的handler
+     * @param msg 传递的消息
+     */
+    private void sendMessage(int id, String msg) {
+        Bundle bundle = new Bundle();
+        bundle.putString("msg",msg);
+        Message message = new Message();
+        message.what = id;
+        message.setData(bundle);
+        handler.sendMessage(message);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LemonBubble.forceHide();
+        OkHttpUtils.getInstance().cancelTag(this);
+        handler.removeCallbacksAndMessages(null);
     }
 }

@@ -1,6 +1,7 @@
 package com.yks.simpledemo2.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,17 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
-import net.lemonsoft.lemonhello.LemonHello;
+import net.lemonsoft.lemonbubble.LemonBubble;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import okhttp3.Call;
 
 /**
  * 描述：通过API接口获取身份证号码的信息
@@ -32,11 +33,15 @@ import org.json.JSONObject;
 
 public class IdCardActivity extends Activity implements View.OnClickListener{
 
+    private Context mContext = IdCardActivity.this;
+    private final int GETIDCARDSUCCESS = 0;
+    private final int GETIDCARDFAIL = 1;
+
     private EditText et_idcard;
     private Button btn_idcard_search;
     private TextView txt_idcard_info;
-    private final int GETIDCARDSUCCESS = 0;
-    private final int GETIDCARDFAIL = 1;
+
+    private String idCardInfo = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +65,7 @@ public class IdCardActivity extends Activity implements View.OnClickListener{
         if (view == btn_idcard_search){
             String idCard = et_idcard.getText().toString().trim();
             if (idCard.equals("")){
-                LemonHello.getErrorHello("错误","身份证号码不能为空");
+                sendMessage(GETIDCARDFAIL,"身份证号码不能为空");
             }else {
                 SearchIdCardInfo(idCard);
             }
@@ -72,11 +77,13 @@ public class IdCardActivity extends Activity implements View.OnClickListener{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == GETIDCARDSUCCESS){//获取身份证信息成功
-                Bundle bundle = msg.getData();
-                txt_idcard_info.setText(bundle.getString("msg"));
+                LemonBubble.hide();
+                txt_idcard_info.setText(idCardInfo);
+                Info.playRingtone(mContext,true);
             }else if (msg.what == GETIDCARDFAIL){//获取身份证信息失败
                 Bundle bundle = msg.getData();
-                LemonHello.getErrorHello("失败",bundle.getString("error"));
+                Info.showToast(mContext, bundle.getString("msg"), false);
+                Info.playRingtone(mContext, false);
             }
         }
     };
@@ -87,59 +94,71 @@ public class IdCardActivity extends Activity implements View.OnClickListener{
      * @param idCard 身份证号码
      */
     private void SearchIdCardInfo(String idCard) {
+        Info.showProgress(mContext,"查询中...");
         String url = "http://api.k780.com:88/?app=idcard.get&idcard="+idCard+"&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json";
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject object = new JSONObject(response);
-                    String success = object.getString("success");
-                    if (success.equals("1")){
-                        //成功
-                        String idCardInfo = "";
-                        JSONObject object1 = object.getJSONObject("result");
-                        idCardInfo += "状态：" + object1.getString("status") + "\n";
-                        idCardInfo += "par：" + object1.getString("par") + "\n";
-                        idCardInfo += "身份证号码：" + object1.getString("idcard") + "\n";
-                        idCardInfo += "出生日期：" + object1.getString("born") + "\n";
-                        idCardInfo += "性别：" + object1.getString("sex") + "\n";
-                        idCardInfo += "地址：" + object1.getString("att") + "\n";
-                        idCardInfo += "邮编：" + object1.getString("postno") + "\n";
-                        idCardInfo += "区号：" + object1.getString("areano") + "\n";
-                        idCardInfo += "籍贯：" + object1.getString("style_simcall") + "\n";
-                        idCardInfo += "城市名称：" + object1.getString("style_citynm") + "\n";
-
-                        Message message = new Message();
-                        message.what = GETIDCARDSUCCESS;
-                        Bundle bundle = new Bundle();
-                        bundle.putString("msg",idCardInfo);
-                        message.setData(bundle);
-                        handler.sendMessage(message);
-                    }else {
-                        //失败
-                        Message message = new Message();
-                        message.what = GETIDCARDFAIL;
-                        Bundle bundle = new Bundle();
-                        bundle.putString("error",object.getString("msg"));
-                        message.setData(bundle);
-                        handler.sendMessage(message);
+        OkHttpUtils.post().url(url)
+                .tag(this)
+                .build()
+                .connTimeOut(10000L)
+                .readTimeOut(10000L)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        sendMessage(GETIDCARDFAIL,"失败1："+e);
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Message message = new Message();
-                    message.what = GETIDCARDFAIL;
-                    Bundle bundle = new Bundle();
-                    bundle.putString("error",e.getMessage());
-                    message.setData(bundle);
-                    handler.sendMessage(message);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
-            }
-        });
-        MainActivity.mQueue.add(request);
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            JSONObject object = new JSONObject(response);
+                            String success = object.getString("success");
+                            if (success.equals("1")){
+                                idCardInfo = "";
+                                //成功
+                                JSONObject object1 = object.getJSONObject("result");
+                                idCardInfo += "状态：" + object1.getString("status") + "\n";
+                                idCardInfo += "par：" + object1.getString("par") + "\n";
+                                idCardInfo += "身份证号码：" + object1.getString("idcard") + "\n";
+                                idCardInfo += "出生日期：" + object1.getString("born") + "\n";
+                                idCardInfo += "性别：" + object1.getString("sex") + "\n";
+                                idCardInfo += "地址：" + object1.getString("att") + "\n";
+                                idCardInfo += "邮编：" + object1.getString("postno") + "\n";
+                                idCardInfo += "区号：" + object1.getString("areano") + "\n";
+                                idCardInfo += "籍贯：" + object1.getString("style_simcall") + "\n";
+                                idCardInfo += "城市名称：" + object1.getString("style_citynm") + "\n";
+
+                                handler.sendEmptyMessage(GETIDCARDSUCCESS);
+                            }else {
+                                sendMessage(GETIDCARDFAIL,object.getString("msg"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            sendMessage(GETIDCARDFAIL,"失败2："+e);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 描述：发handler消息
+     * 作者：zzh
+     * @param id 需要进入到的handler
+     * @param msg 传递的消息
+     */
+    private void sendMessage(int id, String msg) {
+        Bundle bundle = new Bundle();
+        bundle.putString("msg",msg);
+        Message message = new Message();
+        message.what = id;
+        message.setData(bundle);
+        handler.sendMessage(message);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LemonBubble.forceHide();
+        handler.removeCallbacksAndMessages(null);
+        OkHttpUtils.getInstance().cancelTag(this);
     }
 }

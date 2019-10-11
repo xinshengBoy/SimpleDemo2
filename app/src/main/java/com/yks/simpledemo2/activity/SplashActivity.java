@@ -28,7 +28,7 @@ public class SplashActivity extends Activity {
 
         ConstraintLayout layout = findViewById(R.id.layout);
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.1f,1f);
-        alphaAnimation.setDuration(3000);
+        alphaAnimation.setDuration(2000);
         layout.startAnimation(alphaAnimation);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
