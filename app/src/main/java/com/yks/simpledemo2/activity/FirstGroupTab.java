@@ -8,8 +8,8 @@ import android.widget.Button;
 import com.yks.simpledemo2.R;
 
 /**
- * 描述：
- * 作者：
+ * 描述：tab跳转
+ * 作者：zzh
  * time:2018/11/06
  */
 

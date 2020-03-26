@@ -80,14 +80,14 @@ public class RedPointListActivity extends Activity {
         mList.add(bean10);
         mList.add(bean11);
 
-        RedPointAdapter adapter = new RedPointAdapter(mList,R.layout.item_redpoint);
+        RedPointAdapter adapter = new RedPointAdapter(mList);
         rc_redpoint.setAdapter(adapter);
     }
 
     private class RedPointAdapter extends BaseRecyclerAdapter<RedPointBean>{
 
-        public RedPointAdapter(List<RedPointBean> mDatas, int itemId) {
-            super(mDatas, itemId);
+        RedPointAdapter(List<RedPointBean> mDatas) {
+            super(mDatas, R.layout.item_redpoint);
         }
 
         @Override

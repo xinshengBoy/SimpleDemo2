@@ -29,6 +29,7 @@ import okhttp3.Call;
  * 作者：zzh
  * 参考网址：https://blog.csdn.net/huangxinyu_it/article/details/50894320
  * time:2018/08/27
+ * //TODO 注意，不要在局域网或内网环境下请求，否则会报错，应使用数据流量来请求
  */
 
 public class IdCardActivity extends Activity implements View.OnClickListener{
@@ -51,7 +52,7 @@ public class IdCardActivity extends Activity implements View.OnClickListener{
     }
 
     private void initView() {
-        Info.setActionBar(IdCardActivity.this,R.id.headerLayout,"身份证信息");
+        Info.setActionBar(IdCardActivity.this,R.id.headerLayout,"身份证查询");
 
         et_idcard = findViewById(R.id.et_idcard);
         btn_idcard_search = findViewById(R.id.btn_idcard_search);
@@ -88,6 +89,7 @@ public class IdCardActivity extends Activity implements View.OnClickListener{
         }
     };
 
+    //TODO 注意，不要在局域网或内网环境下请求，否则会报错，应使用数据流量来请求
     /**
      * 描述：通过身份证号码获取身份证对应的信息
      * 作者：zzh
@@ -96,7 +98,7 @@ public class IdCardActivity extends Activity implements View.OnClickListener{
     private void SearchIdCardInfo(String idCard) {
         Info.showProgress(mContext,"查询中...");
         String url = "http://api.k780.com:88/?app=idcard.get&idcard="+idCard+"&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json";
-        OkHttpUtils.post().url(url)
+        OkHttpUtils.get().url(url)
                 .tag(this)
                 .build()
                 .connTimeOut(10000L)

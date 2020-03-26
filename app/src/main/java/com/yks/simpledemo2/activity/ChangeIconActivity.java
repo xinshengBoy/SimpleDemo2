@@ -2,6 +2,7 @@ package com.yks.simpledemo2.activity;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.yks.simpledemo2.tools.Info;
  */
 
 public class ChangeIconActivity extends Activity implements View.OnClickListener{
+
+    private Context mContext = ChangeIconActivity.this;
 
     private Button btn_changeicon_11,btn_changeicon_818,btn_changeicon_init;
     private ComponentName mDefault,mDouble11,mDouble818;
@@ -53,10 +56,13 @@ public class ChangeIconActivity extends Activity implements View.OnClickListener
     public void onClick(View view) {
         if (view == btn_changeicon_init){
             initIcon();
+            Info.playRingtone(mContext,true);
         }else if (view == btn_changeicon_11){
             changeIcon11();
+            Info.playRingtone(mContext,true);
         }else if (view == btn_changeicon_818){
             changeIcon818();
+            Info.playRingtone(mContext,true);
         }
     }
 

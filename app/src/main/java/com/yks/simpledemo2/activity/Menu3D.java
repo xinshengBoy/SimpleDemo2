@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
 
 import com.hitomi.cmlibrary.CircleMenu;
-import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
 import com.yks.simpledemo2.R;
@@ -34,19 +32,14 @@ public class Menu3D extends Activity {
     private void initView() {
         //tapbar菜单
         menu_tapbar = findViewById(R.id.menu_tapbar);
-        menu_tapbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean is_opened = menu_tapbar.isOpened();
-                if (is_opened){
-                    menu_tapbar.close();
-                }else {
-                    menu_tapbar.toggle();
-                }
+        menu_tapbar.setOnClickListener(view -> {
+            boolean is_opened = menu_tapbar.isOpened();
+            if (is_opened){
+                menu_tapbar.close();
+            }else {
+                menu_tapbar.toggle();
             }
         });
-
-//        menu_tapbar.onTouchEvent(new )
 
 
         //3D菜单
@@ -66,12 +59,9 @@ public class Menu3D extends Activity {
                     public void onMenuClosed() {
 
                     }
-                }).setOnMenuSelectedListener(new OnMenuSelectedListener() {
-            @Override
-            public void onMenuSelected(int i) {
-                Log.d("menus",i+"");
-                //当前选中的是哪一个
-            }
-        });
+                }).setOnMenuSelectedListener(i -> {
+                    Log.d("menus",i+"");
+                    //当前选中的是哪一个
+                });
     }
 }

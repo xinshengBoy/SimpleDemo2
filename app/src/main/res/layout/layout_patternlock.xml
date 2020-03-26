@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <include
         android:id="@+id/headerLayout"
         layout="@layout/layout_header"/>
@@ -11,11 +10,27 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
-        android:background="#ff12B7F5">
+        android:background="#ff12B7F5"
+        android:layout_centerInParent="true">
         <com.andrognito.patternlockview.PatternLockView
             android:id="@+id/view_pattern_lock"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:dotCount="4"
+            app:dotNormalSize="14dp"
+            app:dotSelectedSize="20dp"
+            app:pathWidth="5dp"
             android:layout_gravity="center"/>
+<!--        app:dotCount="3"                                        // Change the no.of dots in a row (or column)-->
+<!--        app:dotNormalSize="12dp"                                // Change the size of the dots in normal state-->
+<!--        app:dotSelectedSize="24dp"                              // Change the size of the dots in selected state-->
+<!--        app:pathWidth="4dp"                                     // Change the width of the path-->
+<!--        app:aspectRatioEnabled="true"                           // Set if the view should respect custom aspect ratio-->
+<!--        app:aspectRatio="square"                                // Set between "square", "width_bias", "height_bias"-->
+<!--        app:normalStateColor="@color/white"                     // Set the color of the pattern view in normal state-->
+<!--        app:correctStateColor="@color/primary"                  // Set the color of the pattern view in correct state-->
+<!--        app:wrongStateColor="@color/pomegranate"                // Set the color of the pattern view in error state-->
+<!--        app:dotAnimationDuration="200"                          // Change the duration of the animating dots-->
+<!--        app:pathEndAnimationDuration="100"                      // Change the duration of the path end animaiton-->
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

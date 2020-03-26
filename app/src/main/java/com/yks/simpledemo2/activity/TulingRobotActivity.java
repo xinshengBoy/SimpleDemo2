@@ -89,6 +89,7 @@ public class TulingRobotActivity extends Activity implements View.OnClickListene
             if (mWeakReference.get() != null) {
                 if (msg.what == TULINGSUCCESS) {//获取回复成功
                     txt_tuling.setText(allWords);
+                    et_robot.setText("");
                     Info.playRingtone(mContext, true);
                 } else if (msg.what == TULINGFAIL) {
                     Bundle bundle = msg.getData();

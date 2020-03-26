@@ -28,7 +28,6 @@ public class SimplePiano extends Activity {
         setContentView(R.layout.layout_simple_piano);
 
         player = new MediaPlayer();
-
         initView();
     }
 

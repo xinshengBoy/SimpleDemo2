@@ -41,15 +41,12 @@ public class PatternLocks extends Activity {
             @Override
             public void onStarted() {
                 Info.showLog("pattern","开始了");
-//                Info.showToast(PatternLocks.this,"开始了：",true);
             }
 
             @Override
             public void onProgress(List<PatternLockView.Dot> progressPattern) {
                 Info.showLog("pattern","开始滑动了："+getClass().getName()+ "。Pattern progress: " +
                         PatternLockUtils.patternToString(view_pattern_lock, progressPattern));
-//                Info.showToast(PatternLocks.this,"开始滑动了："+getClass().getName()+ "。Pattern progress: " +
-//                        PatternLockUtils.patternToString(view_pattern_lock, progressPattern),true);
             }
 
             @Override
@@ -61,7 +58,6 @@ public class PatternLocks extends Activity {
             @Override
             public void onCleared() {
                 Info.showLog("pattern","清除了");
-//                Info.showToast(PatternLocks.this,"清除了",true);
             }
         };
 

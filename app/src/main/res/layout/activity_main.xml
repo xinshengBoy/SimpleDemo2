@@ -8,14 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:background="#E5B274"
         android:gravity="center"
-        android:paddingBottom="3dp"
-        android:paddingTop="3dp"
-        android:text="主界面"
-        android:textColor="#50AD27"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="SimpleDemo2"
+        android:textColor="@color/colorBlack"
         android:textSize="20sp" />
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/child"
+        android:scaleType="fitXY"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -114,7 +117,7 @@
                 <Button
                     android:id="@+id/btn_shape_attribute"
                     style="@style/baseRes"
-                    android:text="所有shape属性" />
+                    android:text="shape属性" />
             </LinearLayout>
             <LinearLayout style="@style/baseLinearlayout">
 
@@ -180,7 +183,7 @@
                 <Button
                     android:id="@+id/btn_tabActivity"
                     style="@style/baseRes"
-                    android:text="tabhost中activity的跳转" />
+                    android:text="tabhost跳转" />
             </LinearLayout>
             <LinearLayout style="@style/baseLinearlayout">
 
@@ -213,7 +216,7 @@
                 <Button
                     android:id="@+id/btn_elemeDinner"
                     style="@style/baseRes"
-                    android:text="饿了么外卖" />
+                    android:text="饿了么" />
             </LinearLayout>
             <LinearLayout style="@style/baseLinearlayout">
 

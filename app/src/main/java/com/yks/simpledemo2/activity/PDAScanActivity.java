@@ -18,13 +18,14 @@ import com.yks.simpledemo2.tools.Info;
 import net.lemonsoft.lemonbubble.LemonBubble;
 
 /**
- * 描述：
- * 作者：
+ * 描述：PDA扫描
+ * 作者：zzh
  * time:2018/09/07
  */
 
 public class PDAScanActivity extends Activity {
 
+    private Context mContext = PDAScanActivity.this;
     private EditText et_pdascan;
     private String scanResult = "";
     private final int SCANSUCCESS = 0;
@@ -55,7 +56,8 @@ public class PDAScanActivity extends Activity {
                 if (!scanResult.equals("")){
                     et_pdascan.setText(scanResult);
                     et_pdascan.setSelection(et_pdascan.length());
-                    Info.playRingtone(PDAScanActivity.this,true);
+                    Info.showToast(mContext,scanResult,true);
+                    Info.playRingtone(mContext,true);
                 }
             }
         }
@@ -79,5 +81,6 @@ public class PDAScanActivity extends Activity {
         super.onDestroy();
         LemonBubble.forceHide();
         unregisterReceiver(receiver);
+        handler.removeCallbacksAndMessages(null);
     }
 }
