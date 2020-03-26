@@ -1,5 +1,6 @@
 package com.yks.simpledemo2.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioFormat;
@@ -16,7 +17,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.jia.jspermission.listener.JsPermissionListener;
+import com.jia.jspermission.utils.JsPermission;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
 import com.yks.simpledemo2.tools.ToastUtils;
@@ -41,7 +45,7 @@ import java.lang.ref.WeakReference;
  * 作者：zzh
  * time:2019/07/05
  */
-public class AudioRecordActivity extends Activity implements View.OnClickListener {
+public class AudioRecordActivity extends Activity implements View.OnClickListener, JsPermissionListener {
     private Context mContext = AudioRecordActivity.this;
     private Activity mActivity = AudioRecordActivity.this;
 
@@ -100,20 +104,35 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View view) {
         if (view == btn_record){
-            if (!isRecord) {
-                iv_record.setImageResource(R.mipmap.recorded);
-                iv_stop.setImageResource(R.mipmap.stopping);
-//                startRecord();
-                recordAmr();
-            }
+            JsPermission.with(mActivity)
+                    .requestCode(121)
+                    .permission(Manifest.permission.RECORD_AUDIO)
+                    .callBack(this)
+                    .send();
         }else if (view == btn_stop){
             if (isRecord) {
                 iv_record.setImageResource(R.mipmap.recording);
                 iv_stop.setImageResource(R.mipmap.stoped);
-//                finishRecord();
-                stopAmr();
+                finishRecord();
+//                stopAmr();
             }
         }
+    }
+
+    @Override
+    public void onPermit(int i, String... strings) {
+        if (!isRecord) {
+            iv_record.setImageResource(R.mipmap.recorded);
+            iv_stop.setImageResource(R.mipmap.stopping);
+                startRecord();
+//            recordAmr();
+        }
+    }
+
+    @Override
+    public void onCancel(int i, String... strings) {
+        Info.showToast(mContext,"请求的权限已被拒绝或取消，请重试！",false);
+        Info.playRingtone(mContext,false);
     }
 
     private class MyHandler extends Handler {
@@ -410,6 +429,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         }
 
         try {
+            Toast.makeText(mContext,"开始录音",Toast.LENGTH_SHORT).show();
             path = Environment.getExternalStorageDirectory().getPath()+"/MyRecord/"+System.currentTimeMillis()+".amr";
             mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);//设置麦克风
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);//设置音频文件编码
@@ -457,7 +477,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
     private void updateMicStatus() {
         if (mMediaRecorder != null){
-
             handler.postDelayed(mUpdateMicStatusTimer,100);
         }
     }

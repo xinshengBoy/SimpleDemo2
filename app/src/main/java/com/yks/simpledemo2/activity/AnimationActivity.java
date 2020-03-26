@@ -12,7 +12,6 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
@@ -27,7 +26,6 @@ public class AnimationActivity extends Activity {
     private Context mContext = AnimationActivity.this;
     private Activity mActivity = AnimationActivity.this;
     private int screenWidth = 0,screenHeight = 0;
-    private LinearLayout layout;
     private ImageView iv_animation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +39,6 @@ public class AnimationActivity extends Activity {
     private void initView() {
         Info.setActionBar(mActivity,R.id.headerLayout,"动画");
 
-        layout = findViewById(R.id.layout);
         iv_animation = findViewById(R.id.iv_animation);
 
         Button btn_alpha_animation = findViewById(R.id.btn_alpha_animation);
@@ -50,7 +47,7 @@ public class AnimationActivity extends Activity {
             public void onClick(View view) {
                 AlphaAnimation alphaAnimation = new AlphaAnimation(1f,0.2f);
                 alphaAnimation.setDuration(3000);
-                btn_alpha_animation.startAnimation(alphaAnimation);
+                iv_animation.startAnimation(alphaAnimation);
                 alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -61,7 +58,7 @@ public class AnimationActivity extends Activity {
                     public void onAnimationEnd(Animation animation) {
                         AlphaAnimation alphaAnimation = new AlphaAnimation(0.2f,0.9f);
                         alphaAnimation.setDuration(2000);
-                        btn_alpha_animation.startAnimation(alphaAnimation);
+                        iv_animation.startAnimation(alphaAnimation);
                     }
 
                     @Override
@@ -78,8 +75,8 @@ public class AnimationActivity extends Activity {
             public void onClick(View view) {
                 Animation animation = AnimationUtils.loadAnimation(mContext,R.anim.rotates);
                 animation.setDuration(3000);
-                animation.setRepeatCount(5);
-                btn_rotate_animation.startAnimation(animation);
+                animation.setRepeatCount(2);
+                iv_animation.startAnimation(animation);
             }
         });
 
@@ -90,8 +87,6 @@ public class AnimationActivity extends Activity {
                 TranslateAnimation translateAnimation = new TranslateAnimation(0,screenWidth-iv_animation.getWidth(),0,screenHeight-iv_animation.getHeight());
                 translateAnimation.setDuration(3000);
                 iv_animation.startAnimation(translateAnimation);
-                iv_animation.setVisibility(View.VISIBLE);
-                layout.setVisibility(View.GONE);
 
                 translateAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
@@ -101,8 +96,7 @@ public class AnimationActivity extends Activity {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        iv_animation.setVisibility(View.GONE);
-                        layout.setVisibility(View.VISIBLE);
+
                     }
 
                     @Override
@@ -119,7 +113,7 @@ public class AnimationActivity extends Activity {
             public void onClick(View view) {
                 ScaleAnimation scaleAnimation = new ScaleAnimation(1f,5f,1f,5f);
                 scaleAnimation.setDuration(3000);
-                btn_scale_animation.startAnimation(scaleAnimation);
+                iv_animation.startAnimation(scaleAnimation);
             }
         });
     }

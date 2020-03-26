@@ -27,6 +27,8 @@ import com.baidu.tts.client.SpeechSynthesizer;
 import com.baidu.tts.client.SpeechSynthesizerListener;
 import com.baidu.tts.client.TtsMode;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.jia.jspermission.listener.JsPermissionListener;
+import com.jia.jspermission.utils.JsPermission;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.tools.Info;
 import com.yks.simpledemo2.tools.ToastUtils;
@@ -59,7 +61,7 @@ import top.zibin.luban.OnCompressListener;
  * 详见地址：https://console.bce.baidu.com/ai/?_=1557288147159&fromai=1#/ai/ocr/report/index
  * time:2019/05/08
  */
-public class OrcTestActivity extends Activity implements View.OnClickListener, SpeechSynthesizerListener {
+public class OrcTestActivity extends Activity implements View.OnClickListener, SpeechSynthesizerListener, JsPermissionListener {
 
     private Context mContext = OrcTestActivity.this;
     private Activity mActivity = OrcTestActivity.this;
@@ -119,7 +121,7 @@ public class OrcTestActivity extends Activity implements View.OnClickListener, S
         this.mSpeechSynthesizer.setApiKey(BAIDUAI_KEY, BAIDUAI_SECRET_KEY);
 
         // 以下setParam 参数选填。不填写则默认值生效
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "4"); // 设置在线发声音人： 0 普通女声（默认） 1 普通男声 2 特别男声 3 情感男声<度逍遥> 4 情感儿童声<度丫丫>
+        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "0"); // 设置在线发声音人： 0 普通女声（默认） 1 普通男声 2 特别男声 3 情感男声<度逍遥> 4 情感儿童声<度丫丫>
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9"); // 设置合成的音量，0-9 ，默认 5
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, "4");// 设置合成的语速，0-9 ，默认 5
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_PITCH, "5");// 设置合成的语调，0-9 ，默认 5
@@ -164,7 +166,11 @@ public class OrcTestActivity extends Activity implements View.OnClickListener, S
     @Override
     public void onClick(View view) {
         if (view == btn_takephoto){//拍照
-            takePhoto();
+            JsPermission.with(mActivity)
+                    .requestCode(121)
+                    .permission(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .callBack(this)
+                    .send();
         }else if (view == btn_orc){//文字识别
             if (imgPath.equals("")){
                 Info.showToast(mContext,"图片为空，请先拍照",false);
@@ -183,6 +189,17 @@ public class OrcTestActivity extends Activity implements View.OnClickListener, S
             }
             mSpeechSynthesizer.speak(result);
         }
+    }
+
+    @Override
+    public void onPermit(int i, String... strings) {
+        takePhoto();
+    }
+
+    @Override
+    public void onCancel(int i, String... strings) {
+        Info.showToast(mContext,"请求的权限已被拒绝或取消，请重试！",false);
+        Info.playRingtone(mContext,false);
     }
 
     private class MyHandler extends Handler {

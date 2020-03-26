@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,9 +18,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jia.jspermission.listener.JsPermissionListener;
+import com.jia.jspermission.utils.JsPermission;
 import com.yks.simpledemo2.R;
 import com.yks.simpledemo2.bean.CallLogs;
 import com.yks.simpledemo2.tools.CommonAdapter;
@@ -40,7 +44,10 @@ import java.util.List;
  *  参考：https://www.jb51.net/article/94309.htm
  */
 
-public class CallLogActivity extends Activity {
+public class CallLogActivity extends Activity implements JsPermissionListener {
+
+    private Context mContext = CallLogActivity.this;
+    private Activity mActivity = CallLogActivity.this;
 
     private ListView list_calllog;
     private List<CallLogs> mList = new ArrayList<>();
@@ -53,12 +60,11 @@ public class CallLogActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_calllog);
 
-        handler.sendEmptyMessage(GETCALLLOGS);
         initView();
     }
 
     private void initData() {
-        LemonBubble.showRoundProgress(CallLogActivity.this, "获取中...");
+        LemonBubble.showRoundProgress(mContext, "获取中...");
         ContentResolver resolver = getContentResolver();
         /**
          * @param uri 需要查询的URI，（这个URI是ContentProvider提供的）
@@ -68,7 +74,7 @@ public class CallLogActivity extends Activity {
          * @param sortOrder 排序方式
          *
          */
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -87,7 +93,8 @@ public class CallLogActivity extends Activity {
                         , CallLog.Calls.TYPE}// 通话类型
                 , null, null, CallLog.Calls.DEFAULT_SORT_ORDER// 按照时间逆序排列，最近打的最先显示
         );
-        while (cursor.moveToNext()) {
+        assert cursor != null;
+        while (cursor.moveToNext() && mList.size() < 50) {
             //联系人名称
             String name = cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_NAME));
             if (name == null) {
@@ -99,13 +106,13 @@ public class CallLogActivity extends Activity {
             int type = cursor.getInt(cursor.getColumnIndex(CallLog.Calls.TYPE));
             switch (type) {
                 case CallLog.Calls.INCOMING_TYPE:
-                    types = "接入";
+                    types = "1";
                     break;
                 case CallLog.Calls.OUTGOING_TYPE:
-                    types = "呼出";
+                    types = "2";
                     break;
                 case CallLog.Calls.MISSED_TYPE:
-                    types = "未接";
+                    types = "3";
                     break;
                 default:
                     break;
@@ -129,11 +136,15 @@ public class CallLogActivity extends Activity {
             mList.add(logs);
         }
 
-        handler.sendEmptyMessage(GETCALLLOGSSUCCESS);
+        if (mList.size() == 0){
+            handler.sendEmptyMessage(GETCALLLOGSFAIL);
+        }else {
+            handler.sendEmptyMessage(GETCALLLOGSSUCCESS);
+        }
     }
 
     private void initView() {
-        Info.setActionBar(CallLogActivity.this,R.id.headerLayout,"通话记录");
+        Info.setActionBar(mActivity,R.id.headerLayout,"通话记录");
 
         list_calllog = findViewById(R.id.list_calllog);
         list_calllog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -158,26 +169,25 @@ public class CallLogActivity extends Activity {
         });
     }
 
-    private class CallLogAdapter extends CommonAdapter<CallLogs>{
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JsPermission.with(mActivity)
+                .requestCode(121)
+                .permission(Manifest.permission.CALL_PHONE,Manifest.permission.READ_CALL_LOG)
+                .callBack(this)
+                .send();
+    }
 
-        private CallLogAdapter(Context context, List<CallLogs> mDatas, int itemLayoutId) {
-            super(context, mDatas, itemLayoutId);
-        }
+    @Override
+    public void onPermit(int i, String... strings) {
+        handler.sendEmptyMessage(GETCALLLOGS);
+    }
 
-        @Override
-        public void convert(ViewHolder helper, CallLogs item) {
-            TextView name = helper.getView(R.id.txt_item_calllog_name);//联系人名称
-            TextView type = helper.getView(R.id.txt_item_calllog_type);//通话类型
-            TextView number = helper.getView(R.id.txt_item_calllog_number);//电话号码
-            TextView date = helper.getView(R.id.txt_item_calllog_time);//通话日期
-            TextView duration = helper.getView(R.id.txt_item_calllog_long);//通话时长
-
-            name.setText(item.getUserName());
-            type.setText(item.getType());
-            number.setText(item.getNumber());
-            date.setText(item.getDate());
-            duration.setText(item.getDuration());
-        }
+    @Override
+    public void onCancel(int i, String... strings) {
+        Info.showToast(mContext,"请求的权限已被拒绝或取消，请重试！",false);
+        Info.playRingtone(mContext,false);
     }
 
     private final Handler handler = new Handler(Looper.getMainLooper()){
@@ -188,16 +198,49 @@ public class CallLogActivity extends Activity {
                 initData();//获取通话记录
             }else if (msg.what == GETCALLLOGSSUCCESS){
                 LemonBubble.hide();
-                list_calllog.setAdapter(new CallLogAdapter(CallLogActivity.this,mList,R.layout.item_calllogs));
+                list_calllog.setAdapter(new CallLogAdapter(mContext,mList));
             }else if (msg.what == GETCALLLOGSFAIL){
-                LemonBubble.showError(CallLogActivity.this,"请先同意读取通话记录权限",2000);
+                Info.showToast(mContext,"读取通话记录失败",false);
+                Info.playRingtone(mContext,false);
             }
         }
     };
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        handler.sendEmptyMessage(GETCALLLOGS);
+    private class CallLogAdapter extends CommonAdapter<CallLogs>{
+
+        private CallLogAdapter(Context context, List<CallLogs> mDatas) {
+            super(context, mDatas, R.layout.item_calllogs);
+        }
+        @Override
+        public void convert(ViewHolder helper, CallLogs item) {
+            ImageView type = helper.getView(R.id.iv_item_calllog_type);//通话类型
+            TextView name = helper.getView(R.id.txt_item_calllog_name);//联系人名称
+            TextView duration = helper.getView(R.id.txt_item_calllog_long);//通话时长
+            TextView number = helper.getView(R.id.txt_item_calllog_number);//电话号码
+            TextView date = helper.getView(R.id.txt_item_calllog_time);//通话日期
+
+            String callType = item.getType();
+            if (callType.equals("1")){//todo 呼入
+                type.setImageResource(R.mipmap.call_in);
+            }else if (callType.equals("2")){//todo 呼出
+                type.setImageResource(R.mipmap.call_out);
+            }else {//todo 未接
+                type.setImageResource(R.mipmap.call_no);
+            }
+
+            if (callType.equals("3")) {
+                //对于未接的电话，名字和号码变红色
+                name.setTextColor(Color.RED);
+                number.setTextColor(Color.RED);
+            }else {
+                name.setTextColor(Color.BLACK);
+                number.setTextColor(Color.BLACK);
+            }
+
+            name.setText(item.getUserName());
+            duration.setText(item.getDuration());
+            number.setText(item.getNumber());
+            date.setText(item.getDate());
+        }
     }
 }

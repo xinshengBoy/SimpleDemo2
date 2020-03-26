@@ -69,9 +69,9 @@ public class ThirdPartyActivity extends Activity {
     }
 
     public void sendMessage(View view){
-        Uri uri = Uri.parse("smsto:15083336958");
+        Uri uri = Uri.parse("smsto:15082336658");
         Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
-        intent.putExtra("sms_body","宝宝，想你了，今天还没喝水呢，快喝一点");
+        intent.putExtra("sms_body","有内鬼，终止交易");
         startActivity(intent);
     }
 
