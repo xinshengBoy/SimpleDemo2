@@ -16,8 +16,6 @@ import android.os.Message;
 import android.provider.CallLog;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -135,6 +133,7 @@ public class CallLogActivity extends Activity implements JsPermissionListener {
             CallLogs logs = new CallLogs(name, number, date, durations, types);
             mList.add(logs);
         }
+        cursor.close();
 
         if (mList.size() == 0){
             handler.sendEmptyMessage(GETCALLLOGSFAIL);
@@ -147,25 +146,22 @@ public class CallLogActivity extends Activity implements JsPermissionListener {
         Info.setActionBar(mActivity,R.id.headerLayout,"通话记录");
 
         list_calllog = findViewById(R.id.list_calllog);
-        list_calllog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                Uri uri = Uri.parse("tel:" + mList.get(i).getNumber());
-                intent.setData(uri);
-                if (ActivityCompat.checkSelfPermission(CallLogActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    LemonBubble.showError(CallLogActivity.this,"没有拨打电话的权限!");
-                    return;
-                }
-                startActivity(intent);
+        list_calllog.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            Uri uri = Uri.parse("tel:" + mList.get(i).getNumber());
+            intent.setData(uri);
+            if (ActivityCompat.checkSelfPermission(CallLogActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                LemonBubble.showError(CallLogActivity.this,"没有拨打电话的权限!");
+                return;
             }
+            startActivity(intent);
         });
     }
 
@@ -199,6 +195,7 @@ public class CallLogActivity extends Activity implements JsPermissionListener {
             }else if (msg.what == GETCALLLOGSSUCCESS){
                 LemonBubble.hide();
                 list_calllog.setAdapter(new CallLogAdapter(mContext,mList));
+                Info.playRingtone(mContext,true);
             }else if (msg.what == GETCALLLOGSFAIL){
                 Info.showToast(mContext,"读取通话记录失败",false);
                 Info.playRingtone(mContext,false);
@@ -241,6 +238,17 @@ public class CallLogActivity extends Activity implements JsPermissionListener {
             duration.setText(item.getDuration());
             number.setText(item.getNumber());
             date.setText(item.getDate());
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LemonBubble.forceHide();
+        handler.removeCallbacksAndMessages(null);
+        if (mList != null && mList.size() != 0){
+            mList.clear();
+            mList = null;
         }
     }
 }
