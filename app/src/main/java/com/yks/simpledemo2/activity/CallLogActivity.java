@@ -89,10 +89,10 @@ public class CallLogActivity extends Activity implements JsPermissionListener {
                         , CallLog.Calls.DATE// 通话记录的日期
                         , CallLog.Calls.DURATION// 通话时长
                         , CallLog.Calls.TYPE}// 通话类型
-                , null, null, CallLog.Calls.DEFAULT_SORT_ORDER// 按照时间逆序排列，最近打的最先显示
+                , null, null, "date DESC limit 50"// 按照时间逆序排列，最近打的最先显示
         );
         assert cursor != null;
-        while (cursor.moveToNext() && mList.size() < 50) {
+        while (cursor.moveToNext()) {
             //联系人名称
             String name = cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_NAME));
             if (name == null) {
